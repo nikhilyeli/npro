@@ -7,7 +7,11 @@
     "summary": "Experienced Senior Software Engineer with over 4 years of expertise in development and support. Passionate about developing tailor-made software with interactive user-friendly experience and sharing knowledge on current and emerging technologies with peers. Committed to continuous learning and embracing new challenges.",
     "philosophy": "Simple solutions to complex problems.",
     "ctaPhilosophy": "Ready to collaborate on projects where innovation, design, and technology meet.",
-    "passions": ["Coding", "Design", "Problem Solving"],
+    "passions": [
+      "Coding",
+      "Design",
+      "Problem Solving"
+    ],
     "location": "Vijayawada, Andhra Pradesh, India",
     "shortLocation": "Vijayawada, India",
     "email": "nikhilyeli@gmail.com",
@@ -22,9 +26,18 @@
       "Customer Satisfaction"
     ],
     "languages": [
-      { "name": "Hindi", "level": "Professional Working" },
-      { "name": "English", "level": "Full Professional" },
-      { "name": "Telugu", "level": "Native or Bilingual" }
+      {
+        "name": "Hindi",
+        "level": "Professional Working"
+      },
+      {
+        "name": "English",
+        "level": "Full Professional"
+      },
+      {
+        "name": "Telugu",
+        "level": "Native or Bilingual"
+      }
     ],
     "socials": {
       "github": "https://github.com/nikhilyeli",
@@ -75,34 +88,131 @@
     }
   ],
   "skills": [
-    { "name": "React", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", "category": "frontend" },
-    { "name": "TypeScript", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "category": "frontend" },
-    { "name": "JavaScript", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "category": "frontend" },
-    { "name": "jQuery", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg", "category": "frontend" },
-    { "name": "HTML5", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", "category": "frontend" },
-    { "name": "CSS3", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", "category": "frontend" },
-    { "name": "Tailwind", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", "category": "frontend" },
-    { "name": "Material UI", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg", "category": "frontend" },
-    
-    { "name": ".NET", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg", "category": "backend" },
-    { "name": "C#", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg", "category": "backend" },
-    { "name": "ASP.NET", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg", "category": "backend" },
-    { "name": "Entity Framework", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg", "category": "backend" },
-    { "name": "SQL Server", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg", "category": "backend" },
-    { "name": "Node.js", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", "category": "backend" },
-    { "name": "PostgreSQL", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", "category": "backend" },
-    
-    { "name": "Git", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "category": "tools" },
-    { "name": "Docker", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", "category": "tools" },
-    { "name": "VS Code", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", "category": "tools" },
-    { "name": "Visual Studio", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg", "category": "tools" },
-    { "name": "Azure", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg", "category": "tools" },
-    { "name": "GitHub", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", "category": "tools" },
-    
-    { "name": "Figma", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", "category": "design" },
-    { "name": "Adobe XD", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg", "category": "design" },
-    { "name": "Photoshop", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg", "category": "design" },
-    { "name": "Illustrator", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg", "category": "design" }
+    {
+      "name": "React",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      "category": "frontend"
+    },
+    {
+      "name": "TypeScript",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      "category": "frontend"
+    },
+    {
+      "name": "JavaScript",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+      "category": "frontend"
+    },
+    {
+      "name": "jQuery",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg",
+      "category": "frontend"
+    },
+    {
+      "name": "HTML5",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+      "category": "frontend"
+    },
+    {
+      "name": "CSS3",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+      "category": "frontend"
+    },
+    {
+      "name": "Tailwind",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+      "category": "frontend"
+    },
+    {
+      "name": "Material UI",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg",
+      "category": "frontend"
+    },
+    {
+      "name": ".NET",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg",
+      "category": "backend"
+    },
+    {
+      "name": "C#",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
+      "category": "backend"
+    },
+    {
+      "name": "ASP.NET",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg",
+      "category": "backend"
+    },
+    {
+      "name": "Entity Framework",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg",
+      "category": "backend"
+    },
+    {
+      "name": "SQL Server",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg",
+      "category": "backend"
+    },
+    {
+      "name": "Node.js",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      "category": "backend"
+    },
+    {
+      "name": "PostgreSQL",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+      "category": "backend"
+    },
+    {
+      "name": "Git",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+      "category": "tools"
+    },
+    {
+      "name": "Docker",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+      "category": "tools"
+    },
+    {
+      "name": "VS Code",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+      "category": "tools"
+    },
+    {
+      "name": "Visual Studio",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg",
+      "category": "tools"
+    },
+    {
+      "name": "Azure",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
+      "category": "tools"
+    },
+    {
+      "name": "GitHub",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+      "category": "tools"
+    },
+    {
+      "name": "Figma",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+      "category": "design"
+    },
+    {
+      "name": "Adobe XD",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg",
+      "category": "design"
+    },
+    {
+      "name": "Photoshop",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg",
+      "category": "design"
+    },
+    {
+      "name": "Illustrator",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg",
+      "category": "design"
+    }
   ],
   "projects": [
     {
@@ -110,7 +220,12 @@
       "title": "AI Work Diary",
       "description": "An orchestrator designed to review and summarize work activities, including Jira tickets, Bitbucket git commits, and various calls/activities from multiple sources using AI.",
       "image": "https://images.unsplash.com/photo-1518770660439-4636190af475",
-      "tags": ["TypeScript", "AI", "Node.js", "Jira API"],
+      "tags": [
+        "TypeScript",
+        "AI",
+        "Node.js",
+        "Jira API"
+      ],
       "demoUrl": "https://github.com/nikhilyeli/ai-workdiary#readme",
       "codeUrl": "https://github.com/nikhilyeli/ai-workdiary",
       "category": "fullstack"
@@ -120,7 +235,12 @@
       "title": "Signature Maxi",
       "description": "A multimode digital signature frontend component dashboard for secure digital signatures.",
       "image": "https://raw.githubusercontent.com/nikhilyeli/signature-maxi/master/social-preview.png",
-      "tags": ["React", "TypeScript", "Tailwind CSS", "Dashboard"],
+      "tags": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Dashboard"
+      ],
       "demoUrl": "https://github.com/nikhilyeli/signature-maxi#readme",
       "codeUrl": "https://github.com/nikhilyeli/signature-maxi",
       "category": "frontend"
@@ -130,7 +250,13 @@
       "title": "Customer 360",
       "description": "Developed and executed a Customer 360 project using Microsoft Azure Cloud Data Engineering, resulting in a 10% decrease in bank customer attrition rates upon implementation of insights derived from feedback data analysis. Employed advanced data analytics methodologies to process feedback data, leading to the discovery of actionable insights that contributed to a 15% increase in customer retention within the banking sector.",
       "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
-      "tags": ["Azure", "Data Engineering", "SQL", "KPI Dashboards", "Analytics"],
+      "tags": [
+        "Azure",
+        "Data Engineering",
+        "SQL",
+        "KPI Dashboards",
+        "Analytics"
+      ],
       "demoUrl": "",
       "codeUrl": "",
       "category": "backend"
@@ -140,9 +266,14 @@
       "title": "Live Yoga Simulation",
       "description": "Engineered a Live Yoga Simulation project using Python, Computer Vision, achieving an accuracy rate of 90% in detecting and recognizing yoga poses in real-time webcam feeds. Applied advanced computer vision algorithms to analyse live video data, enabling the prediction of personalized yoga poses with a precision of 85%, enhancing user engagement and experience.",
       "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b",
-      "tags": ["Python", "OpenCV", "MediaPipe", "Computer Vision"],
+      "tags": [
+        "Python",
+        "OpenCV",
+        "MediaPipe",
+        "Computer Vision"
+      ],
       "demoUrl": "",
-      "codeUrl": "https://github.com/nikhilyeli/yoga-simulation",
+      "codeUrl": "",
       "category": "fullstack"
     },
     {
@@ -150,9 +281,14 @@
       "title": "Where Is My Car",
       "description": "Designed and implemented a 'Where is my Car?' project leveraging an IoT Arduino UNO controller, achieving an accuracy rate of 95% in detecting and transmitting the car's location via SMS. Developed a robust system that consistently delivered real-time updates on the car's whereabouts, enabling users to locate their vehicles promptly and effectively through SMS notifications.",
       "image": "https://images.unsplash.com/photo-1506015391300-4802dc74de2e",
-      "tags": ["IoT", "Arduino", "Geolocation", "SMS API"],
+      "tags": [
+        "IoT",
+        "Arduino",
+        "Geolocation",
+        "SMS API"
+      ],
       "demoUrl": "",
-      "codeUrl": "https://github.com/nikhilyeli/where-is-my-car",
+      "codeUrl": "",
       "category": "frontend"
     },
     {
@@ -160,9 +296,15 @@
       "title": "Code Ninja",
       "description": "Developed a personal project titled 'Code Ninja' focusing on web development, featuring an interactive code editor for HTML, CSS, and JavaScript. Implemented an interactive code editor enabling live previews, resulting in a 30% increase in user engagement compared to static platforms.",
       "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
-      "tags": ["HTML", "CSS", "JavaScript", "Code Editor", "Frontend"],
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Code Editor",
+        "Frontend"
+      ],
       "demoUrl": "",
-      "codeUrl": "https://github.com/nikhilyeli/code-ninja",
+      "codeUrl": "",
       "category": "frontend"
     },
     {
@@ -170,9 +312,14 @@
       "title": "POC Playwright E2E",
       "description": "A proof-of-concept repository demonstrating end-to-end browser testing, automation, and test reports with Playwright.",
       "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
-      "tags": ["Playwright", "TypeScript", "E2E Testing", "Automation"],
-      "demoUrl": "https://github.com/nikhilyeli/poc-playwright-e2e#readme",
-      "codeUrl": "https://github.com/nikhilyeli/poc-playwright-e2e",
+      "tags": [
+        "Playwright",
+        "TypeScript",
+        "E2E Testing",
+        "Automation"
+      ],
+      "demoUrl": "",
+      "codeUrl": "",
       "category": "backend"
     }
   ],
@@ -193,7 +340,13 @@
         "Optimize data processing pipelines for high-throughput experimental data.",
         "Utilize modern fullstack technologies to build robust internal visualization tools and dashboards."
       ],
-      "technologies": ["C#", ".NET", "React", "TypeScript", "SQL"],
+      "technologies": [
+        "C#",
+        ".NET",
+        "React",
+        "TypeScript",
+        "SQL"
+      ],
       "type": "work"
     },
     {
@@ -213,7 +366,14 @@
         "Slashed software bug resolution time by 15%, saving 9 hours per project cycle and ensuring on-time delivery.",
         "Maintained a 95% client satisfaction rate and resolved over 500 technical queries monthly."
       ],
-      "technologies": ["C#", ".NET", "ASP.NET", "MVC", "VB.NET", "SQL Server"],
+      "technologies": [
+        "C#",
+        ".NET",
+        "ASP.NET",
+        "MVC",
+        "VB.NET",
+        "SQL Server"
+      ],
       "type": "work"
     },
     {
@@ -234,7 +394,15 @@
         "Leveraged online collaboration tools to coordinate effectively with remote teams on 4 projects, ensuring seamless communication and alignment despite geographical barriers.",
         "Stayed ahead of technological advancements, integrating 5 emerging technologies, and demonstrated autonomy in executing 3 assignments with high-quality results and minimal supervision."
       ],
-      "technologies": ["ReactJS", "TypeScript", "C#", ".NET", "jQuery", "Material UI", "SQL Server"],
+      "technologies": [
+        "ReactJS",
+        "TypeScript",
+        "C#",
+        ".NET",
+        "jQuery",
+        "Material UI",
+        "SQL Server"
+      ],
       "type": "work"
     },
     {
@@ -254,7 +422,14 @@
         "Played a pivotal role in designing and implementing data storage solutions and pipelines, resulting in a 40% improvement in data retrieval time and a 20% increase in data accuracy for critical projects.",
         "Engaged in continuous learning, acquiring Azure/Azure DevOps knowledge and mastering data transformation frameworks, leading to a 50% increase in efficiency in handling complex data transformations and integrations."
       ],
-      "technologies": ["Azure", "Databricks", "Data Factory", "Python", "SQL", "PySpark"],
+      "technologies": [
+        "Azure",
+        "Databricks",
+        "Data Factory",
+        "Python",
+        "SQL",
+        "PySpark"
+      ],
       "type": "work"
     },
     {
@@ -318,57 +493,67 @@
     "certifications": [
       {
         "id": 1,
-        "title": "Programming in Java",
-        "issuer": "NPTEL IIT Kharagpur",
-        "date": "Recent",
-        "description": "Earned NPTEL IIT Kharagpur's Programming in Java certification."
+        "title": "Azure Data Engineering Internship",
+        "issuer": "HCLTech",
+        "date": "August 2022",
+        "description": "Completed Azure Data Engineering Internship at HCLTech.",
+        "link": "https://media.licdn.com/dms/image/v2/D562DAQHjzVK8vo3_4A/profile-treasury-document-images_1920/profile-treasury-document-images_1920/1/1693663524986?e=1785369600&v=beta&t=ebnRTpCH1dwyYCbmxhjoPXTNAWGm_Nbaxq5Gn-5SPbk"
       },
       {
         "id": 2,
+        "title": "Programming in Java",
+        "issuer": "NPTEL IIT Kharagpur",
+        "date": "October 2019",
+        "description": "Earned NPTEL IIT Kharagpur's Programming in Java certification.",
+        "link": "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL19CS84S42310677191139161"
+      },
+      {
+        "id": 3,
         "title": "Python for Data Science",
         "issuer": "NPTEL IIT Madras",
-        "date": "Recent",
-        "description": "Completed NPTEL IIT Madras's Python for Data Science certification."
+        "date": "Feburary 2020",
+        "description": "Completed NPTEL IIT Madras's Python for Data Science certification.",
+        "link": "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL20CS36S1PC601898"
       }
     ],
     "awards": [
       {
-        "id": 3,
+        "id": 4,
         "title": "ERS Innovation Champion",
         "issuer": "HCL ERS PLM DU",
         "date": "February 2023",
         "description": "Awarded the title of ERS Innovation Champion by HCL ERS PLM DU."
       },
       {
-        "id": 4,
+        "id": 5,
         "title": "Team Dynamics Recognition",
         "issuer": "HCLTech",
         "date": "Recent",
         "description": "Acknowledged for active participation and contribution to team dynamics at HCLTech."
       },
       {
-        "id": 5,
+        "id": 6,
         "title": "Web Arc Award",
         "issuer": "Ramachandra College of Engineering, Eluru",
         "date": "Recent",
         "description": "Received Web Arc award."
       },
       {
-        "id": 6,
+        "id": 7,
         "title": "Blind Coding Award",
         "issuer": "NRI Institute of Technology",
         "date": "Recent",
         "description": "Achieved NRI Institute of Technology's Blind Coding award."
       },
       {
-        "id": 7,
+        "id": 8,
         "title": "Project Expo Participation",
         "issuer": "NRI Institute of Technology",
         "date": "Engineer's Day",
         "description": "Participated in NRI Institute of Technology's Project Expo Engineer’s Day."
       },
       {
-        "id": 8,
+        "id": 9,
         "title": "Engineer's Day Essay",
         "issuer": "NRI Institute of Technology",
         "date": "Recent",
@@ -377,20 +562,20 @@
     ],
     "publications": [
       {
-        "id": 9,
+        "id": 10,
         "title": "LIVE YOGA SIMULATION USING OPENCV AND MEDIAPIPE",
         "issuer": "Project / Publication",
         "date": "December 2021 – April 2022",
         "description": "Developed a real-time computer vision system that tracks body postures for yoga simulation using OpenCV and MediaPipe framework.",
-        "link": ""
+        "link": "https://drive.google.com/file/d/10CdrM_Sf2T8uQn8hSC8EQ6RAAErb4CfH/view"
       },
       {
-        "id": 10,
+        "id": 11,
         "title": "WHERE IS MY CAR",
         "issuer": "Project / Publication",
         "date": "December 2019 – November 2019",
         "description": "Built a vehicle localization and tracking system utilizing mobile GPS APIs and mapping platforms.",
-        "link": ""
+        "link": "https://drive.google.com/file/d/1lB2X6pcrKZT5elnNNJiHmac_8BIxoHYx/view"
       }
     ]
   }

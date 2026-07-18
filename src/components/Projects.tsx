@@ -19,12 +19,17 @@ interface Project {
 
 const Projects: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('all');
-  
+
   const projects: Project[] = portfolioData.projects as Project[];
 
-  const filteredProjects = activeTab === 'all' 
-    ? projects 
+  const filteredProjects = activeTab === 'all'
+    ? projects
     : projects.filter(project => project.category === activeTab);
+
+  const hasFrontend = projects.some(p => p.category === 'frontend');
+  const hasFullstack = projects.some(p => p.category === 'fullstack');
+  const hasBackend = projects.some(p => p.category === 'backend');
+  const hasDesign = projects.some(p => p.category === 'design');
 
   return (
     <section id="projects" className="py-20 bg-background dark:bg-dark-background">
@@ -36,28 +41,28 @@ const Projects: React.FC = () => {
             A selection of my recent work across various domains
           </p>
         </div>
-        
+
         <div className="max-w-6xl mx-auto">
           <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
             <div className="flex justify-center mb-8">
               <TabsList>
                 <TabsTrigger value="all">All</TabsTrigger>
-                <TabsTrigger value="frontend">Frontend</TabsTrigger>
-                <TabsTrigger value="fullstack">Fullstack</TabsTrigger>
-                <TabsTrigger value="backend">Backend</TabsTrigger>
-                <TabsTrigger value="design">Design</TabsTrigger>
+                {hasFrontend && <TabsTrigger value="frontend">Frontend</TabsTrigger>}
+                {hasFullstack && <TabsTrigger value="fullstack">Fullstack</TabsTrigger>}
+                {hasBackend && <TabsTrigger value="backend">Backend</TabsTrigger>}
+                {hasDesign && <TabsTrigger value="design">Design</TabsTrigger>}
               </TabsList>
             </div>
-            
+
             <TabsContent value={activeTab} className="mt-0">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProjects.map((project) => (
                   <Card key={project.id} className="project-card overflow-hidden border-border h-full flex flex-col">
                     <div className="h-48 overflow-hidden relative">
-                      <img 
-                        src={project.image} 
-                        alt={project.title} 
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" 
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
                         <h3 className="text-white font-bold text-xl">{project.title}</h3>
