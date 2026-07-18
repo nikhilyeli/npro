@@ -9,6 +9,7 @@ import Experience from '@/components/Experience';
 import Achievements from '@/components/Achievements';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import Services from '@/components/Services';
 import { Toaster } from '@/components/ui/toaster';
 
 const Index = () => {
@@ -48,6 +49,7 @@ const Index = () => {
       <main>
         <Hero />
         <Console />
+        <Services />
         <Skills />
         <Projects />
         <Experience />

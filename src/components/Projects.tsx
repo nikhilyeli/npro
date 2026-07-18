@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import portfolioData from '@/data/portfolio.json';
 
 interface Project {
   id: number;
@@ -19,66 +20,7 @@ interface Project {
 const Projects: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('all');
   
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: "E-commerce Platform",
-      description: "A full-featured e-commerce platform with product management, cart functionality, and payment processing.",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
-      tags: ["React", "TypeScript", ".NET", "SQL Server", "Azure"],
-      demoUrl: "#",
-      codeUrl: "#",
-      category: "fullstack"
-    },
-    {
-      id: 2,
-      title: "Task Management Dashboard",
-      description: "An intuitive task management system with real-time updates and team collaboration features.",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-      tags: ["Angular", "C#", "Entity Framework", "SignalR"],
-      demoUrl: "#",
-      codeUrl: "#",
-      category: "fullstack"
-    },
-    {
-      id: 3,
-      title: "Fitness Tracking App",
-      description: "Mobile-responsive fitness tracking application with progress visualization and goal setting.",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
-      tags: ["React", "Chart.js", "Tailwind CSS", "Firebase"],
-      demoUrl: "#",
-      codeUrl: "#",
-      category: "frontend"
-    },
-    {
-      id: 4,
-      title: "Content Management System",
-      description: "Custom CMS with role-based access control and rich content editing capabilities.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-      tags: [".NET", "C#", "SQL", "Azure"],
-      demoUrl: "#",
-      codeUrl: "#",
-      category: "backend"
-    },
-    {
-      id: 5,
-      title: "Travel Planning Platform",
-      description: "UI/UX design for a travel planning platform featuring itinerary management and location discovery.",
-      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
-      tags: ["Figma", "Photoshop", "UI/UX", "Prototype"],
-      category: "design"
-    },
-    {
-      id: 6,
-      title: "Real Estate Listing Portal",
-      description: "Property listing platform with advanced search, filtering, and user account management.",
-      image: "https://images.unsplash.com/photo-1527576539890-dfa815648363",
-      tags: ["React", "Node.js", "MongoDB", "Google Maps API"],
-      demoUrl: "#",
-      codeUrl: "#",
-      category: "fullstack"
-    },
-  ];
+  const projects: Project[] = portfolioData.projects as Project[];
 
   const filteredProjects = activeTab === 'all' 
     ? projects 
@@ -135,12 +77,12 @@ const Projects: React.FC = () => {
                       <p className="text-muted-foreground text-sm">{project.description}</p>
                     </CardContent>
                     <CardFooter className="p-4 pt-0 flex gap-3">
-                      {project.demoUrl && (
+                      {project.demoUrl && project.demoUrl !== "#" && project.demoUrl !== "" && (
                         <Button variant="default" size="sm" onClick={() => window.open(project.demoUrl, '_blank')}>
                           Live Demo
                         </Button>
                       )}
-                      {project.codeUrl && (
+                      {project.codeUrl && project.codeUrl !== "#" && project.codeUrl !== "" && (
                         <Button variant="outline" size="sm" onClick={() => window.open(project.codeUrl, '_blank')}>
                           View Code
                         </Button>

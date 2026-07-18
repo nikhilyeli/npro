@@ -1,30 +1,48 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import portfolioData from '@/data/portfolio.json';
+
+interface TerminalLine {
+  type: 'command' | 'output';
+  text: string;
+}
 
 const Console: React.FC = () => {
   const [text, setText] = useState<string[]>([]);
   const [isTyping, setIsTyping] = useState(true);
   const [currentLine, setCurrentLine] = useState(0);
   const [visibleText, setVisibleText] = useState<string[]>([]);
+  
+  // Interactive console states
+  const [terminalHistory, setTerminalHistory] = useState<TerminalLine[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const [isInteractive, setIsInteractive] = useState(false);
+  const consoleContainerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleTerminalClick = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
 
   // Console content - JSON structure with personal information
   const consoleLines = [
-    '> Nikhil.getAbout()',
+    `> ${portfolioData.personalInfo.firstName}.getAbout()`,
     `{`,
-    `  "name": "Nikhil",`,
-    `  "title": "Fullstack Software Engineer",`,
-    `  "passions": ["Coding", "Design", "Problem Solving"],`,
+    `  "name": "${portfolioData.personalInfo.name}",`,
+    `  "title": "${portfolioData.personalInfo.title}",`,
+    `  "passions": ${JSON.stringify(portfolioData.personalInfo.passions)},`,
     `  "background": {`,
-    `    "summary": "Experienced software engineer with a passion for creating elegant, efficient, and user-friendly applications."`,
+    `    "summary": "${portfolioData.personalInfo.summary}"`,
     `  },`,
-    `  "philosophy": "Simple solutions to complex problems."`,
+    `  "philosophy": "${portfolioData.personalInfo.philosophy}"`,
     `}`,
-    '> Nikhil.contact()',
+    `> ${portfolioData.personalInfo.firstName}.contact()`,
     `{`,
-    `  "email": "hello@nikhil.dev",`,
-    `  "github": "github.com/nikhildev",`,
-    `  "linkedin": "linkedin.com/in/nikhildev"`,
+    `  "email": "${portfolioData.personalInfo.email}",`,
+    `  "github": "${portfolioData.personalInfo.socials.github.replace('https://', '')}",`,
+    `  "linkedin": "${portfolioData.personalInfo.socials.linkedin.replace('https://', '')}"`,
     `}`,
   ];
 
@@ -34,6 +52,7 @@ const Console: React.FC = () => {
     setVisibleText([]);
     setCurrentLine(0);
     setIsTyping(true);
+    setIsInteractive(false);
     
     // Add a delay before typing starts
     const startTimeout = setTimeout(() => {
@@ -44,6 +63,21 @@ const Console: React.FC = () => {
         } else {
           setIsTyping(false);
           clearInterval(timer);
+          
+          // Transition to interactive CLI terminal
+          const initialHistory: TerminalLine[] = consoleLines.map(line => {
+            const isCmd = line.startsWith('>');
+            return {
+              type: isCmd ? 'command' : 'output',
+              text: isCmd ? line.substring(2) : line
+            };
+          });
+          
+          setTerminalHistory([
+            ...initialHistory,
+            { type: 'output', text: '\nTerminal active. Type "help" to see available commands.' }
+          ]);
+          setIsInteractive(true);
         }
       }, 200);
   
@@ -69,7 +103,7 @@ const Console: React.FC = () => {
             return newArr;
           });
           visibleChars++;
-          timeoutId = setTimeout(typeChar, 20);
+          timeoutId = setTimeout(typeChar, 15);
         }
       };
       
@@ -78,6 +112,150 @@ const Console: React.FC = () => {
     
     return () => clearTimeout(timeoutId);
   }, [text, isTyping]);
+
+  // Handle Easter Egg Event Listeners
+  useEffect(() => {
+    const handleEasterEgg = (e: CustomEvent<{ type: string }>) => {
+      const eggType = e.detail?.type || 'microsoft';
+      triggerEasterEgg(eggType);
+    };
+    
+    window.addEventListener('trigger-easter-egg' as any, handleEasterEgg);
+    return () => window.removeEventListener('trigger-easter-egg' as any, handleEasterEgg);
+  }, [isInteractive]);
+
+  // Scroll to bottom on updates
+  useEffect(() => {
+    if (consoleContainerRef.current) {
+      consoleContainerRef.current.scrollTop = consoleContainerRef.current.scrollHeight;
+    }
+  }, [terminalHistory, visibleText, isTyping]);
+
+  const triggerEasterEgg = (type: string) => {
+    let art: string[] = [];
+    if (type === 'google') {
+      art = [
+        ' ',
+        '   ____   ___    ___    ____  _      _____ ',
+        '  / ___| / _ \\  / _ \\  / ___|| |    | ____|',
+        ' | |  _ | | | || | | || |  _ | |    |  _|  ',
+        ' | |_| || |_| || |_| || |_| || |___ | |___ ',
+        '  \\____| \\___/  \\___/  \\____||_____||_____|',
+        ' ',
+        '[System Surprise: Google Advanced Agent Mode Active!]',
+        'Antigravity AI is paired with your session.',
+        ' '
+      ];
+    } else {
+      art = [
+        ' ',
+        '  _  _   __  __  ___   ___    ___   ___    ___   _____ ',
+        ' |  \\/  | |  \\/  | | _ \\ | _ \\  / _ \\ | __|  / _ \\ |__  / ',
+        ' | |\\/| | | |\\/| | |  _/ |   / | (_) ||__ \\ | (_) |  / /  ',
+        ' |_|  |_| |_|  |_| |_|   |_|_\\  \\___/ |___/  \\___/  /_/   ',
+        ' ',
+        '[System Surprise: Microsoft Tech Stack Active!]',
+        'C# .NET Core compilation status: 100% stable.',
+        ' '
+      ];
+    }
+    
+    setTerminalHistory(prev => [
+      ...prev,
+      { type: 'command', text: type === 'google' ? 'google-easteregg' : 'microsoft-easteregg' },
+      ...art.map(text => ({ type: 'output' as const, text }))
+    ]);
+  };
+
+  const processCommand = (cmd: string) => {
+    const cleanCmd = cmd.trim().toLowerCase();
+    let response: string[] = [];
+
+    switch (cleanCmd) {
+      case 'help':
+        response = [
+          'Available commands:',
+          '  about       - Professional bio and summary',
+          '  skills      - Key technical capabilities',
+          '  experience  - Work history and education',
+          '  services    - Services offered',
+          '  projects    - Selected software projects',
+          '  contact     - Contact and social links',
+          '  clear       - Clear the screen',
+          '  easteregg   - Trigger a secret surprise!'
+        ];
+        break;
+      case 'about':
+        response = [
+          JSON.stringify({
+            name: portfolioData.personalInfo.name,
+            title: portfolioData.personalInfo.title,
+            experience: 'Over 4 years',
+            philosophies: [portfolioData.personalInfo.philosophy, portfolioData.personalInfo.ctaPhilosophy],
+            summary: portfolioData.personalInfo.summary
+          }, null, 2)
+        ];
+        break;
+      case 'skills':
+        const categories: Record<string, string[]> = {};
+        portfolioData.skills.forEach(s => {
+          if (!categories[s.category]) categories[s.category] = [];
+          categories[s.category].push(s.name);
+        });
+        response = Object.entries(categories).map(([cat, list]) => 
+          `[${cat.toUpperCase()}]: ${list.join(', ')}`
+        );
+        break;
+      case 'experience':
+        response = portfolioData.experience.map(item => {
+          if (item.type === 'work') {
+            return `- ${item.jobTitle} - ${item.role} @ ${item.organization} (${item.period}) [Location: ${item.place || 'Remote'}] [Mode: ${item.workMode || 'remote'}, ${item.employmentMode || 'full-time'}]`;
+          }
+          return `- ${item.title} @ ${item.organization} (${item.period}) [Location: ${item.place || 'N/A'}]`;
+        });
+        break;
+      case 'services':
+        response = portfolioData.services.map(s => `* ${s.title}: ${s.description}`);
+        break;
+      case 'projects':
+        response = portfolioData.projects.map(p => `* ${p.title} (${p.category}): ${p.description}`);
+        break;
+      case 'contact':
+        response = [
+          `Email: ${portfolioData.personalInfo.email}`,
+          `Phone: ${portfolioData.personalInfo.phone}`,
+          `Location: ${portfolioData.personalInfo.location}`,
+          `LinkedIn: ${portfolioData.personalInfo.socials.linkedin}`,
+          `GitHub: ${portfolioData.personalInfo.socials.github}`
+        ];
+        break;
+      case 'clear':
+        setTerminalHistory([]);
+        return;
+      case 'easteregg':
+        triggerEasterEgg('microsoft');
+        return;
+      case 'matrix':
+      case 'google':
+        triggerEasterEgg('google');
+        return;
+      default:
+        response = [`Command not found: "${cmd}". Type "help" to see available commands.`];
+    }
+
+    setTerminalHistory(prev => [
+      ...prev,
+      { type: 'command', text: cmd },
+      ...response.map(text => ({ type: 'output' as const, text }))
+    ]);
+  };
+
+  const handleCommandSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inputValue.trim()) return;
+    processCommand(inputValue);
+    setInputValue('');
+  };
 
   return (
     <section id="about" className="py-20 bg-background dark:bg-dark-background">
@@ -90,42 +268,75 @@ const Console: React.FC = () => {
         <div className="max-w-3xl mx-auto">
           <Card className="border border-border bg-console-bg text-console-text rounded-lg overflow-hidden shadow-xl">
             <CardContent className="p-0">
-              <div className="bg-black/40 flex items-center px-4 py-2 border-b border-border">
+              <div className="bg-black/40 flex items-center justify-between px-4 py-2 border-b border-border">
                 <div className="flex gap-2">
                   <div className="w-3 h-3 rounded-full bg-brand-red"></div>
                   <div className="w-3 h-3 rounded-full bg-brand-yellow"></div>
                   <div className="w-3 h-3 rounded-full bg-brand-green"></div>
                 </div>
-                <div className="ml-4 text-xs opacity-70">nikhil@portfolio ~ console</div>
+                <div className="text-xs opacity-70 font-mono">nikhil@portfolio ~ terminal</div>
+                <div className="w-12"></div> {/* Spacer */}
               </div>
               
-              <div className="font-mono text-sm p-6 min-h-[350px]" style={{ whiteSpace: 'pre-wrap' }}>
-                {visibleText.map((line, index) => (
-                  <div key={index} className="mb-1">
-                    <span className={(line && line.startsWith('>')) ? 'text-brand-blue' : ''}>
-                      {line}
-                    </span>
-                    {index === visibleText.length - 1 && isTyping && (
-                      <span className="console-cursor"></span>
+              <div 
+                ref={consoleContainerRef}
+                onClick={handleTerminalClick}
+                className="font-mono text-sm p-6 min-h-[380px] max-h-[500px] overflow-y-auto cursor-text" 
+                style={{ whiteSpace: 'pre-wrap' }}
+              >
+                {isTyping ? (
+                  visibleText.map((line, index) => (
+                    <div key={index} className="mb-1">
+                      <span className={(line && line.startsWith('>')) ? 'text-brand-blue' : ''}>
+                        {line}
+                      </span>
+                      {index === visibleText.length - 1 && (
+                        <span className="console-cursor"></span>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    {terminalHistory.map((item, index) => (
+                      <div key={index} className="mb-1">
+                        {item.type === 'command' ? (
+                          <div>
+                            <span className="text-brand-green">nikhil@portfolio ~ % </span>
+                            <span className="text-brand-blue font-bold">{item.text}</span>
+                          </div>
+                        ) : (
+                          <div className={item.text.startsWith('[System') ? 'text-brand-yellow font-bold' : ''}>
+                            {item.text}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                    
+                    {isInteractive && (
+                      <form onSubmit={handleCommandSubmit} className="flex items-center gap-2 mt-2">
+                        <span className="text-brand-green">nikhil@portfolio ~ %</span>
+                        <input 
+                          ref={inputRef}
+                          type="text" 
+                          value={inputValue} 
+                          onChange={(e) => setInputValue(e.target.value)}
+                          className="bg-transparent border-none outline-none flex-grow text-console-text font-mono text-sm focus:ring-0 p-0 focus:outline-none"
+                          placeholder="type 'help'..."
+                        />
+                      </form>
                     )}
-                  </div>
-                ))}
-                {!isTyping && <span className="console-cursor"></span>}
+                  </>
+                )}
               </div>
             </CardContent>
           </Card>
           
           <div className="mt-12 text-center">
-            <p className="text-lg leading-relaxed mb-6">
-              I'm a fullstack developer with expertise in building robust web applications using modern technologies. 
-              From frontend development with React and Angular to backend systems with .NET and C#, I'm passionate about
-              creating efficient, elegant solutions that solve real-world problems.
-            </p>
-            <p className="text-lg leading-relaxed">
-              Beyond coding, I have a strong interest in UI/UX design, video editing, photography, and content creation. 
-              This combination of technical and creative skills allows me to approach each project with a holistic perspective,
-              ensuring the end result is not only functional but also visually compelling and user-friendly.
-            </p>
+            {portfolioData.personalInfo.aboutParagraphs.map((paragraph, index) => (
+              <p key={index} className="text-lg leading-relaxed mb-6">
+                {paragraph}
+              </p>
+            ))}
           </div>
         </div>
       </div>

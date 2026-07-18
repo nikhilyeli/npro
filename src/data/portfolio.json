@@ -1,0 +1,397 @@
+{
+  "personalInfo": {
+    "name": "Nikhil Yeli",
+    "firstName": "Nikhil",
+    "title": "Senior Software Engineer",
+    "subtitle": "Microsoft Technologies • Full-Stack Developer",
+    "summary": "Experienced Senior Software Engineer with over 4 years of expertise in development and support. Passionate about developing tailor-made software with interactive user-friendly experience and sharing knowledge on current and emerging technologies with peers. Committed to continuous learning and embracing new challenges.",
+    "philosophy": "Simple solutions to complex problems.",
+    "ctaPhilosophy": "Ready to collaborate on projects where innovation, design, and technology meet.",
+    "passions": ["Coding", "Design", "Problem Solving"],
+    "location": "Vijayawada, Andhra Pradesh, India",
+    "shortLocation": "Vijayawada, India",
+    "email": "nikhilyeli@gmail.com",
+    "phone": "+919390452172",
+    "aboutParagraphs": [
+      "Experienced Senior Software Engineer with over 4 years of expertise in development and support. Passionate about developing tailor-made software with interactive user-friendly experience and sharing knowledge on current and emerging technologies with peers.",
+      "Committed to continuous learning and embracing new challenges, I specialize in full-stack engineering with .NET technologies (C#) on the backend and modern web frameworks like React and TypeScript on the frontend. I also possess extensive hands-on experience in cloud data engineering using Azure Databricks and Data Factory."
+    ],
+    "topSkills": [
+      "Technical Computing",
+      "KPI Dashboards",
+      "Customer Satisfaction"
+    ],
+    "languages": [
+      { "name": "Hindi", "level": "Professional Working" },
+      { "name": "English", "level": "Full Professional" },
+      { "name": "Telugu", "level": "Native or Bilingual" }
+    ],
+    "socials": {
+      "github": "https://github.com/nikhilyeli",
+      "linkedin": "https://linkedin.com/in/nikhilyeli",
+      "twitter": "https://twitter.com/nikhilyeli",
+      "instagram": "https://instagram.com/nikki.nikhil.1811"
+    }
+  },
+  "hero": {
+    "titles": [
+      "Senior Software Engineer",
+      "Fullstack Developer",
+      "UI/UX Designer",
+      "Problem Solver"
+    ],
+    "description": "Experienced Senior Software Engineer specializing in scalable .NET backend architectures and elegant React frontends."
+  },
+  "services": [
+    {
+      "title": "Fullstack Development",
+      "description": "Building end-to-end, high-performance web applications using Microsoft .NET Core (C#) on the backend and React, TypeScript, or jQuery on the frontend.",
+      "highlights": [
+        "Robust RESTful API & microservices design",
+        "State management and dynamic client-side rendering",
+        "Responsive, mobile-first design implementation",
+        "Database integration and performance tuning"
+      ]
+    },
+    {
+      "title": "Cloud Data Engineering",
+      "description": "Designing and implementing robust data pipelines, storage solutions, and ETL processes using Azure Databricks, Data Factory, SQL, and PySpark.",
+      "highlights": [
+        "End-to-end ETL/ELT pipelines with Azure Data Factory",
+        "High-performance big data processing with PySpark",
+        "Data lakehouse architectures and storage engineering",
+        "Interactive KPI dashboards and Customer 360 analytics"
+      ]
+    },
+    {
+      "title": "UI/UX & Frontend Design",
+      "description": "Creating user-centric, responsive layouts and dynamic web interfaces with Figma, Material UI, Tailwind CSS, and custom CSS for seamless user experience.",
+      "highlights": [
+        "Figma prototyping and user flow mapping",
+        "Modern component-driven development",
+        "Tailwind CSS and Material UI custom design systems",
+        "Micro-animations and responsive layouts"
+      ]
+    }
+  ],
+  "skills": [
+    { "name": "React", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", "category": "frontend" },
+    { "name": "TypeScript", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "category": "frontend" },
+    { "name": "JavaScript", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "category": "frontend" },
+    { "name": "jQuery", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg", "category": "frontend" },
+    { "name": "HTML5", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", "category": "frontend" },
+    { "name": "CSS3", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", "category": "frontend" },
+    { "name": "Tailwind", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", "category": "frontend" },
+    { "name": "Material UI", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg", "category": "frontend" },
+    
+    { "name": ".NET", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg", "category": "backend" },
+    { "name": "C#", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg", "category": "backend" },
+    { "name": "ASP.NET", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg", "category": "backend" },
+    { "name": "Entity Framework", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg", "category": "backend" },
+    { "name": "SQL Server", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg", "category": "backend" },
+    { "name": "Node.js", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", "category": "backend" },
+    { "name": "PostgreSQL", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", "category": "backend" },
+    
+    { "name": "Git", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "category": "tools" },
+    { "name": "Docker", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", "category": "tools" },
+    { "name": "VS Code", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", "category": "tools" },
+    { "name": "Visual Studio", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg", "category": "tools" },
+    { "name": "Azure", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg", "category": "tools" },
+    { "name": "GitHub", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", "category": "tools" },
+    
+    { "name": "Figma", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", "category": "design" },
+    { "name": "Adobe XD", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg", "category": "design" },
+    { "name": "Photoshop", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg", "category": "design" },
+    { "name": "Illustrator", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg", "category": "design" }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "AI Work Diary",
+      "description": "An orchestrator designed to review and summarize work activities, including Jira tickets, Bitbucket git commits, and various calls/activities from multiple sources using AI.",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      "tags": ["TypeScript", "AI", "Node.js", "Jira API"],
+      "demoUrl": "https://github.com/nikhilyeli/ai-workdiary#readme",
+      "codeUrl": "https://github.com/nikhilyeli/ai-workdiary",
+      "category": "fullstack"
+    },
+    {
+      "id": 2,
+      "title": "Signature Maxi",
+      "description": "A multimode digital signature frontend component dashboard for secure digital signatures.",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+      "tags": ["React", "TypeScript", "Tailwind CSS", "Dashboard"],
+      "demoUrl": "https://github.com/nikhilyeli/signature-maxi#readme",
+      "codeUrl": "https://github.com/nikhilyeli/signature-maxi",
+      "category": "frontend"
+    },
+    {
+      "id": 3,
+      "title": "Customer 360",
+      "description": "Developed and executed a Customer 360 project using Microsoft Azure Cloud Data Engineering, resulting in a 10% decrease in bank customer attrition rates upon implementation of insights derived from feedback data analysis. Employed advanced data analytics methodologies to process feedback data, leading to the discovery of actionable insights that contributed to a 15% increase in customer retention within the banking sector.",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+      "tags": ["Azure", "Data Engineering", "SQL", "KPI Dashboards", "Analytics"],
+      "demoUrl": "",
+      "codeUrl": "",
+      "category": "backend"
+    },
+    {
+      "id": 4,
+      "title": "Live Yoga Simulation",
+      "description": "Engineered a Live Yoga Simulation project using Python, Computer Vision, achieving an accuracy rate of 90% in detecting and recognizing yoga poses in real-time webcam feeds. Applied advanced computer vision algorithms to analyse live video data, enabling the prediction of personalized yoga poses with a precision of 85%, enhancing user engagement and experience.",
+      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b",
+      "tags": ["Python", "OpenCV", "MediaPipe", "Computer Vision"],
+      "demoUrl": "",
+      "codeUrl": "https://github.com/nikhilyeli/yoga-simulation",
+      "category": "fullstack"
+    },
+    {
+      "id": 5,
+      "title": "Where Is My Car",
+      "description": "Designed and implemented a 'Where is my Car?' project leveraging an IoT Arduino UNO controller, achieving an accuracy rate of 95% in detecting and transmitting the car's location via SMS. Developed a robust system that consistently delivered real-time updates on the car's whereabouts, enabling users to locate their vehicles promptly and effectively through SMS notifications.",
+      "image": "https://images.unsplash.com/photo-1506015391300-4802dc74de2e",
+      "tags": ["IoT", "Arduino", "Geolocation", "SMS API"],
+      "demoUrl": "",
+      "codeUrl": "https://github.com/nikhilyeli/where-is-my-car",
+      "category": "frontend"
+    },
+    {
+      "id": 6,
+      "title": "Code Ninja",
+      "description": "Developed a personal project titled 'Code Ninja' focusing on web development, featuring an interactive code editor for HTML, CSS, and JavaScript. Implemented an interactive code editor enabling live previews, resulting in a 30% increase in user engagement compared to static platforms.",
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+      "tags": ["HTML", "CSS", "JavaScript", "Code Editor", "Frontend"],
+      "demoUrl": "",
+      "codeUrl": "https://github.com/nikhilyeli/code-ninja",
+      "category": "frontend"
+    },
+    {
+      "id": 7,
+      "title": "POC Playwright E2E",
+      "description": "A proof-of-concept repository demonstrating end-to-end browser testing, automation, and test reports with Playwright.",
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+      "tags": ["Playwright", "TypeScript", "E2E Testing", "Automation"],
+      "demoUrl": "https://github.com/nikhilyeli/poc-playwright-e2e#readme",
+      "codeUrl": "https://github.com/nikhilyeli/poc-playwright-e2e",
+      "category": "backend"
+    }
+  ],
+  "experience": [
+    {
+      "id": 1,
+      "jobTitle": "Software Engineer",
+      "role": "Full Stack Developer",
+      "organization": "ITER Organization",
+      "period": "March 2024 - Present",
+      "place": "Saint-Paul-lez-Durance, France",
+      "workMode": "remote",
+      "employmentMode": "full-time",
+      "description": "Design and develop high-performance software applications and tools for fusion research control and data systems.",
+      "highlights": [
+        "Design and develop software components for real-time diagnostics and data acquisition systems.",
+        "Collaborate with international teams of scientists and engineers to integrate core software modules.",
+        "Optimize data processing pipelines for high-throughput experimental data.",
+        "Utilize modern fullstack technologies to build robust internal visualization tools and dashboards."
+      ],
+      "technologies": ["C#", ".NET", "React", "TypeScript", "SQL"],
+      "type": "work"
+    },
+    {
+      "id": 2,
+      "jobTitle": "Senior Software Engineer",
+      "role": "Full Stack Developer",
+      "organization": "HCL Technologies Ltd.",
+      "period": "January 2024 - Present",
+      "place": "Bangalore, India",
+      "workMode": "hybrid",
+      "employmentMode": "full-time",
+      "description": "Enterprise PLM applications development and technical support engineering.",
+      "highlights": [
+        "Successfully transitioned from Senior Support Engineer to Dot.NET Developer within 3 months.",
+        "Achieved a 20% rise in customer satisfaction and a 15% decrease in issue escalation by implementing collaborative problem-solving techniques.",
+        "Delivered a 9% efficiency boost, a 10% reduction in issue resolution time and a 21% decrease in customer wait time through support process optimization.",
+        "Slashed software bug resolution time by 15%, saving 9 hours per project cycle and ensuring on-time delivery.",
+        "Maintained a 95% client satisfaction rate and resolved over 500 technical queries monthly."
+      ],
+      "technologies": ["C#", ".NET", "ASP.NET", "MVC", "VB.NET", "SQL Server"],
+      "type": "work"
+    },
+    {
+      "id": 3,
+      "jobTitle": "Post Graduate Engineer Trainee",
+      "role": "Full Stack Developer",
+      "organization": "HCL Technologies Ltd.",
+      "period": "August 2022 - December 2023",
+      "place": "Bangalore, India",
+      "workMode": "onsite",
+      "employmentMode": "full-time",
+      "description": "Software development training and backend API implementation.",
+      "highlights": [
+        "Resolved 300+ bugs, reduced backlog by 30% and implemented 6 scalable features, boosting performance by 20%.",
+        "Organized 20 engaging activities, enhancing team cohesion and morale while fostering a positive work environment.",
+        "Earned the title of ERS Innovation Champion, facilitating the organization of engaging team collaboration and engagement activities.",
+        "Developed comprehensive testing plans, decreasing post-release defects by 15% and consistently met tight project deadlines, ensuring on-time delivery of all modules and documentation.",
+        "Leveraged online collaboration tools to coordinate effectively with remote teams on 4 projects, ensuring seamless communication and alignment despite geographical barriers.",
+        "Stayed ahead of technological advancements, integrating 5 emerging technologies, and demonstrated autonomy in executing 3 assignments with high-quality results and minimal supervision."
+      ],
+      "technologies": ["ReactJS", "TypeScript", "C#", ".NET", "jQuery", "Material UI", "SQL Server"],
+      "type": "work"
+    },
+    {
+      "id": 4,
+      "jobTitle": "Academic Trainee",
+      "role": "Microsoft Azure Cloud Data Engineer",
+      "organization": "HCL Technologies Ltd.",
+      "period": "February 2022 - August 2022",
+      "place": "Bangalore, India",
+      "workMode": "onsite",
+      "employmentMode": "full-time",
+      "description": "Internship focusing on cloud data pipelines and data engineering foundations.",
+      "highlights": [
+        "Completed the Customer 360 project as an intern, employing Azure cloud data engineering concepts, resulting in a 20% increase in data accessibility and processing efficiency.",
+        "Implemented a machine learning model and crafted user-friendly KPI dashboards for comprehensive 360-degree data analytics.",
+        "Mastered Python, SQL, PySpark, Azure Databricks and Azure Data Factory resulting in a 25% improvement in data processing speed and a 30% reduction in faulty data errors in project implementations.",
+        "Played a pivotal role in designing and implementing data storage solutions and pipelines, resulting in a 40% improvement in data retrieval time and a 20% increase in data accuracy for critical projects.",
+        "Engaged in continuous learning, acquiring Azure/Azure DevOps knowledge and mastering data transformation frameworks, leading to a 50% increase in efficiency in handling complex data transformations and integrations."
+      ],
+      "technologies": ["Azure", "Databricks", "Data Factory", "Python", "SQL", "PySpark"],
+      "type": "work"
+    },
+    {
+      "id": 5,
+      "title": "Bachelor of Technology in Information Technology",
+      "organization": "NRI Institute of Technology (NRIIT)",
+      "period": "June 2018 - April 2022",
+      "place": "Vijayawada, Andhra Pradesh, India",
+      "highlights": [
+        "Bachelor of Technology in Information Technology",
+        "Graduated with comprehensive knowledge of software development, database design, and IT systems."
+      ],
+      "type": "education"
+    },
+    {
+      "id": 6,
+      "title": "Intermediate (Mathematics, Physics, Chemistry)",
+      "organization": "Narayana Junior College",
+      "period": "June 2016 - April 2018",
+      "place": "Vijayawada, Andhra Pradesh, India",
+      "highlights": [
+        "Completed Board of Intermediate Education with focus on Mathematics, Physics, and Chemistry."
+      ],
+      "type": "education"
+    },
+    {
+      "id": 7,
+      "title": "SSC (Secondary School Certificate)",
+      "organization": "Narayana EM High School",
+      "period": "June 2013 - April 2016",
+      "place": "Vijayawada, Andhra Pradesh, India",
+      "highlights": [
+        "Secondary School Certificate with focus on general sciences, languages, and advanced mathematics."
+      ],
+      "type": "education"
+    },
+    {
+      "id": 8,
+      "title": "Middle School Education",
+      "organization": "Sarada School of Excellence",
+      "period": "June 2010 - April 2013",
+      "place": "Vijayawada, Andhra Pradesh, India",
+      "highlights": [
+        "Acquired foundational middle school certifications with emphasis on English and sciences."
+      ],
+      "type": "education"
+    },
+    {
+      "id": 9,
+      "title": "Primary Schooling",
+      "organization": "Little Buds High School",
+      "period": "June 2005 - April 2010",
+      "place": "Vijayawada, Andhra Pradesh, India",
+      "highlights": [
+        "Completed early primary schooling foundation curriculum."
+      ],
+      "type": "education"
+    }
+  ],
+  "achievements": {
+    "certifications": [
+      {
+        "id": 1,
+        "title": "Programming in Java",
+        "issuer": "NPTEL IIT Kharagpur",
+        "date": "Recent",
+        "description": "Earned NPTEL IIT Kharagpur's Programming in Java certification."
+      },
+      {
+        "id": 2,
+        "title": "Python for Data Science",
+        "issuer": "NPTEL IIT Madras",
+        "date": "Recent",
+        "description": "Completed NPTEL IIT Madras's Python for Data Science certification."
+      }
+    ],
+    "awards": [
+      {
+        "id": 3,
+        "title": "ERS Innovation Champion",
+        "issuer": "HCL ERS PLM DU",
+        "date": "February 2023",
+        "description": "Awarded the title of ERS Innovation Champion by HCL ERS PLM DU."
+      },
+      {
+        "id": 4,
+        "title": "Team Dynamics Recognition",
+        "issuer": "HCLTech",
+        "date": "Recent",
+        "description": "Acknowledged for active participation and contribution to team dynamics at HCLTech."
+      },
+      {
+        "id": 5,
+        "title": "Web Arc Award",
+        "issuer": "Ramachandra College of Engineering, Eluru",
+        "date": "Recent",
+        "description": "Received Web Arc award."
+      },
+      {
+        "id": 6,
+        "title": "Blind Coding Award",
+        "issuer": "NRI Institute of Technology",
+        "date": "Recent",
+        "description": "Achieved NRI Institute of Technology's Blind Coding award."
+      },
+      {
+        "id": 7,
+        "title": "Project Expo Participation",
+        "issuer": "NRI Institute of Technology",
+        "date": "Engineer's Day",
+        "description": "Participated in NRI Institute of Technology's Project Expo Engineer’s Day."
+      },
+      {
+        "id": 8,
+        "title": "Engineer's Day Essay",
+        "issuer": "NRI Institute of Technology",
+        "date": "Recent",
+        "description": "Contributed to NRI Institute of Technology's Engineer’s Day Essay."
+      }
+    ],
+    "publications": [
+      {
+        "id": 9,
+        "title": "LIVE YOGA SIMULATION USING OPENCV AND MEDIAPIPE",
+        "issuer": "Project / Publication",
+        "date": "December 2021 – April 2022",
+        "description": "Developed a real-time computer vision system that tracks body postures for yoga simulation using OpenCV and MediaPipe framework.",
+        "link": ""
+      },
+      {
+        "id": 10,
+        "title": "WHERE IS MY CAR",
+        "issuer": "Project / Publication",
+        "date": "December 2019 – November 2019",
+        "description": "Built a vehicle localization and tracking system utilizing mobile GPS APIs and mapping platforms.",
+        "link": ""
+      }
+    ]
+  }
+}

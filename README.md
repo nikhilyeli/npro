@@ -10,7 +10,7 @@ A modern, visually impressive, and recruiter-friendly developer portfolio site b
 
 
 
-[Visit Portfolio](https://nikhilyeli-hcl.github.io/npro/)
+[Visit Portfolio](https://nikhilyeli.github.io/npro/)
 
 
 

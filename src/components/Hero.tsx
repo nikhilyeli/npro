@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from './Logo';
+import portfolioData from '@/data/portfolio.json';
+
 const Hero: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const [currentTitle, setCurrentTitle] = useState(0);
-  const titles = ['Fullstack Developer', 'UI/UX Designer', 'Software Engineer', 'Problem Solver'];
+  const titles = portfolioData.hero.titles;
   useEffect(() => {
     setMounted(true);
     const interval = setInterval(() => {
       setCurrentTitle(prev => (prev + 1) % titles.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [titles.length]);
   if (!mounted) return null;
   return <section id="hero" className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
       {/* Background Gradient */}
@@ -34,7 +36,7 @@ const Hero: React.FC = () => {
         </div>
         
         <h1 className="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-          <span className="block">Hi, I'm Nikhil Yeli</span>
+          <span className="block">Hi, I'm {portfolioData.personalInfo.name}</span>
           <div className="h-14 md:h-16 lg:h-20 overflow-hidden mt-2">
             {titles.map((title, index) => <div key={title} className="transition-all duration-500 transform" style={{
             opacity: currentTitle === index ? 1 : 0,
@@ -49,7 +51,7 @@ const Hero: React.FC = () => {
         </h1>
         
         <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-xl">
-          Building robust full-stack solutions with a focus on elegant user experiences and scalable architecture.
+          {portfolioData.hero.description}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-10">

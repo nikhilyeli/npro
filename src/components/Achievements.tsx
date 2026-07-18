@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
+import portfolioData from '@/data/portfolio.json';
 
 interface Achievement {
   id: number;
@@ -15,78 +16,18 @@ interface Achievement {
 }
 
 const Achievements: React.FC = () => {
-  const items: Achievement[] = [
-    // Certifications
-    {
-      id: 1,
-      title: "Microsoft Certified: Azure Developer Associate",
-      issuer: "Microsoft",
-      date: "2023",
-      description: "Validates expertise in designing, building, testing, and maintaining cloud applications and services on Microsoft Azure.",
-      link: "#",
-      type: "certification"
-    },
-    {
-      id: 2,
-      title: "AWS Certified Developer - Associate",
-      issuer: "Amazon Web Services",
-      date: "2022",
-      description: "Demonstrates knowledge in developing, deploying, and debugging cloud-based applications using AWS.",
-      link: "#",
-      type: "certification"
-    },
-    {
-      id: 3,
-      title: "Professional Scrum Master I",
-      issuer: "Scrum.org",
-      date: "2021",
-      description: "Validates understanding of Scrum framework and ability to apply it effectively.",
-      link: "#",
-      type: "certification"
-    },
-    
-    // Awards
-    {
-      id: 4,
-      title: "Innovation Award",
-      issuer: "Tech Innovations Inc.",
-      date: "2022",
-      description: "Awarded for developing an AI-powered recommendation system that increased customer engagement by 40%.",
-      type: "award"
-    },
-    {
-      id: 5,
-      title: "Hackathon Winner",
-      issuer: "Global Developer Conference",
-      date: "2021",
-      description: "First place in the annual hackathon for creating an accessibility tool for visually impaired users.",
-      type: "award"
-    },
-    
-    // Publications
-    {
-      id: 6,
-      title: "Modern Frontend Architecture Patterns",
-      issuer: "Tech Journal",
-      date: "2023",
-      description: "Research paper discussing emerging patterns in frontend architecture and their impact on application performance.",
-      link: "#",
-      type: "publication"
-    },
-    {
-      id: 7,
-      title: "Optimizing .NET Core Microservices",
-      issuer: "Software Engineering Quarterly",
-      date: "2022",
-      description: "Case study on performance optimization techniques for .NET Core microservices in high-load environments.",
-      link: "#",
-      type: "publication"
-    }
-  ];
-
-  const certifications = items.filter(item => item.type === 'certification');
-  const awards = items.filter(item => item.type === 'award');
-  const publications = items.filter(item => item.type === 'publication');
+  const certifications: Achievement[] = portfolioData.achievements.certifications.map(item => ({
+    ...item,
+    type: 'certification' as const
+  }));
+  const awards: Achievement[] = portfolioData.achievements.awards.map(item => ({
+    ...item,
+    type: 'award' as const
+  }));
+  const publications: Achievement[] = portfolioData.achievements.publications.map(item => ({
+    ...item,
+    type: 'publication' as const
+  }));
 
   return (
     <section id="achievements" className="py-20 bg-background dark:bg-dark-background">
@@ -119,7 +60,7 @@ const Achievements: React.FC = () => {
                     </CardHeader>
                     <CardContent className="p-4 pt-0">
                       {item.description && <p className="text-sm">{item.description}</p>}
-                      {item.link && (
+                      {item.link && item.link !== "#" && item.link !== "" && (
                         <a 
                           href={item.link} 
                           target="_blank" 
@@ -167,7 +108,7 @@ const Achievements: React.FC = () => {
                     </CardHeader>
                     <CardContent className="p-4 pt-0">
                       {item.description && <p className="text-sm">{item.description}</p>}
-                      {item.link && (
+                      {item.link && item.link !== "#" && item.link !== "" && (
                         <a 
                           href={item.link} 
                           target="_blank" 
