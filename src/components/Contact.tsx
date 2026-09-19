@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import SectionHeading from '@/components/SectionHeading';
 import portfolioData from '@/data/portfolio.json';
 const Contact: React.FC = () => {
   const {
@@ -44,15 +45,12 @@ const Contact: React.FC = () => {
 
     (e.target as HTMLFormElement).reset();
   };
-  return <section id="contact" className="py-20 bg-muted/50 dark:bg-dark-background/50">
+  return <section id="contact" className="py-20 bg-muted/50">
     <div className="container mx-auto px-4">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold mb-2">Get in Touch</h2>
-        <div className="h-1 w-20 bg-primary mx-auto"></div>
-        <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-          Have a project in mind or want to collaborate? Drop me a message!
-        </p>
-      </div>
+      <SectionHeading
+        title="Get in Touch"
+        description="Have a project in mind or want to collaborate? Drop me a message!"
+      />
 
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

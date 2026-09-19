@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
       behavior: 'smooth'
     });
   };
-  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 dark:bg-dark-background/80 backdrop-blur-md shadow-md' : 'bg-transparent'}`}>
+  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-md' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Logo size="sm" variant={isScrolled ? 'default' : 'minimal'} />
@@ -73,7 +73,7 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className={`md:hidden absolute w-full bg-background dark:bg-dark-background shadow-lg transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+      <div className={`md:hidden absolute w-full bg-background shadow-lg transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[80vh] opacity-100 overflow-y-auto' : 'max-h-0 opacity-0 overflow-hidden'}`}>
         <div className="container mx-auto px-4 py-4 flex flex-col space-y-3">
           {navItems.map(item => <button key={item.name} onClick={() => scrollToSection(item.href)} className="text-left py-2 text-sm font-medium hover:text-primary transition-colors">
               {item.name}

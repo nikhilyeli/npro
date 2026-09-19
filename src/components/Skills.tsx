@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import SectionHeading from '@/components/SectionHeading';
 import { cn } from '@/lib/utils';
 import portfolioData from '@/data/portfolio.json';
 
@@ -21,15 +22,12 @@ const Skills: React.FC = () => {
     : skills.filter(skill => skill.category === activeTab);
 
   return (
-    <section id="skills" className="py-20 bg-muted/50 dark:bg-dark-background/50">
+    <section id="skills" className="py-20 bg-muted/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-2">Skills & Technologies</h2>
-          <div className="h-1 w-20 bg-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            Technologies and tools I work with to bring ideas to life
-          </p>
-        </div>
+        <SectionHeading
+          title="Skills & Technologies"
+          description="Technologies and tools I work with to bring ideas to life"
+        />
         
         <div className="max-w-5xl mx-auto">
           <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>

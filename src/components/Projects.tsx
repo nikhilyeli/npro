@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import SectionHeading from '@/components/SectionHeading';
 import portfolioData from '@/data/portfolio.json';
 
 interface Project {
@@ -32,15 +33,12 @@ const Projects: React.FC = () => {
   const hasDesign = projects.some(p => p.category === 'design');
 
   return (
-    <section id="projects" className="py-20 bg-background dark:bg-dark-background">
+    <section id="projects" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-2">Featured Projects</h2>
-          <div className="h-1 w-20 bg-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            A selection of my recent work across various domains
-          </p>
-        </div>
+        <SectionHeading
+          title="Featured Projects"
+          description="A selection of my recent work across various domains"
+        />
 
         <div className="max-w-6xl mx-auto">
           <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>

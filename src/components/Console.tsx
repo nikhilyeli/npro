@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import SectionHeading from '@/components/SectionHeading';
 import portfolioData from '@/data/portfolio.json';
 
 interface TerminalLine {
@@ -10,7 +11,6 @@ interface TerminalLine {
 const Console: React.FC = () => {
   const [text, setText] = useState<string[]>([]);
   const [isTyping, setIsTyping] = useState(true);
-  const [currentLine, setCurrentLine] = useState(0);
   const [visibleText, setVisibleText] = useState<string[]>([]);
   
   // Interactive console states
@@ -47,32 +47,34 @@ const Console: React.FC = () => {
   ];
 
   useEffect(() => {
-    // Reset states when component mounts
+    // Reset state, then run the typing sequence exactly once on mount.
     setText([]);
     setVisibleText([]);
-    setCurrentLine(0);
     setIsTyping(true);
     setIsInteractive(false);
-    
+
+    let line = 0;
+    let timer: ReturnType<typeof setInterval>;
+
     // Add a delay before typing starts
     const startTimeout = setTimeout(() => {
-      const timer = setInterval(() => {
-        if (currentLine < consoleLines.length) {
-          setText(prev => [...prev, consoleLines[currentLine]]);
-          setCurrentLine(prev => prev + 1);
+      timer = setInterval(() => {
+        if (line < consoleLines.length) {
+          setText(prev => [...prev, consoleLines[line]]);
+          line++;
         } else {
           setIsTyping(false);
           clearInterval(timer);
-          
+
           // Transition to interactive CLI terminal
-          const initialHistory: TerminalLine[] = consoleLines.map(line => {
-            const isCmd = line.startsWith('>');
+          const initialHistory: TerminalLine[] = consoleLines.map(l => {
+            const isCmd = l.startsWith('>');
             return {
               type: isCmd ? 'command' : 'output',
-              text: isCmd ? line.substring(2) : line
+              text: isCmd ? l.substring(2) : l
             };
           });
-          
+
           setTerminalHistory([
             ...initialHistory,
             { type: 'output', text: '\nTerminal active. Type "help" to see available commands.' }
@@ -80,12 +82,14 @@ const Console: React.FC = () => {
           setIsInteractive(true);
         }
       }, 200);
-  
-      return () => clearInterval(timer);
     }, 500);
 
-    return () => clearTimeout(startTimeout);
-  }, [currentLine]);
+    return () => {
+      clearTimeout(startTimeout);
+      clearInterval(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Type animation effect
   useEffect(() => {
@@ -93,6 +97,7 @@ const Console: React.FC = () => {
     
     if (text.length > 0 && isTyping) {
       const lastLine = text[text.length - 1];
+      if (!lastLine) return;
       let visibleChars = 0;
       
       const typeChar = () => {
@@ -258,21 +263,18 @@ const Console: React.FC = () => {
   };
 
   return (
-    <section id="about" className="py-20 bg-background dark:bg-dark-background">
+    <section id="about" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-2">About Me</h2>
-          <div className="h-1 w-20 bg-primary mx-auto"></div>
-        </div>
-        
+        <SectionHeading title="About Me" />
+
         <div className="max-w-3xl mx-auto">
-          <Card className="border border-border bg-console-bg text-console-text rounded-lg overflow-hidden shadow-xl">
+          <Card className="border border-border bg-terminal-bg text-terminal-fg rounded-lg overflow-hidden shadow-xl">
             <CardContent className="p-0">
               <div className="bg-black/40 flex items-center justify-between px-4 py-2 border-b border-border">
                 <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-brand-red"></div>
-                  <div className="w-3 h-3 rounded-full bg-brand-yellow"></div>
-                  <div className="w-3 h-3 rounded-full bg-brand-green"></div>
+                  <div className="w-3 h-3 rounded-full bg-terminal-red"></div>
+                  <div className="w-3 h-3 rounded-full bg-terminal-yellow"></div>
+                  <div className="w-3 h-3 rounded-full bg-terminal-green"></div>
                 </div>
                 <div className="text-xs opacity-70 font-mono">nikhil@portfolio ~ terminal</div>
                 <div className="w-12"></div> {/* Spacer */}
@@ -287,7 +289,7 @@ const Console: React.FC = () => {
                 {isTyping ? (
                   visibleText.map((line, index) => (
                     <div key={index} className="mb-1">
-                      <span className={(line && line.startsWith('>')) ? 'text-brand-blue' : ''}>
+                      <span className={(line && line.startsWith('>')) ? 'text-terminal-prompt' : ''}>
                         {line}
                       </span>
                       {index === visibleText.length - 1 && (
@@ -301,11 +303,11 @@ const Console: React.FC = () => {
                       <div key={index} className="mb-1">
                         {item.type === 'command' ? (
                           <div>
-                            <span className="text-brand-green">nikhil@portfolio ~ % </span>
-                            <span className="text-brand-blue font-bold">{item.text}</span>
+                            <span className="text-terminal-prompt">nikhil@portfolio ~ % </span>
+                            <span className="text-terminal-command font-bold">{item.text}</span>
                           </div>
                         ) : (
-                          <div className={item.text.startsWith('[System') ? 'text-brand-yellow font-bold' : ''}>
+                          <div className={item.text.startsWith('[System') ? 'text-terminal-highlight font-bold' : ''}>
                             {item.text}
                           </div>
                         )}
@@ -314,13 +316,13 @@ const Console: React.FC = () => {
                     
                     {isInteractive && (
                       <form onSubmit={handleCommandSubmit} className="flex items-center gap-2 mt-2">
-                        <span className="text-brand-green">nikhil@portfolio ~ %</span>
-                        <input 
+                        <span className="text-terminal-prompt">nikhil@portfolio ~ %</span>
+                        <input
                           ref={inputRef}
-                          type="text" 
-                          value={inputValue} 
+                          type="text"
+                          value={inputValue}
                           onChange={(e) => setInputValue(e.target.value)}
-                          className="bg-transparent border-none outline-none flex-grow text-console-text font-mono text-sm focus:ring-0 p-0 focus:outline-none"
+                          className="bg-transparent border-none outline-none flex-grow text-terminal-fg font-mono text-sm focus:ring-0 p-0 focus:outline-none"
                           placeholder="type 'help'..."
                         />
                       </form>

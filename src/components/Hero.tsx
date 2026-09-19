@@ -17,16 +17,13 @@ const Hero: React.FC = () => {
   if (!mounted) return null;
   return <section id="hero" className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
       {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background to-background dark:from-transparent dark:via-dark-background dark:to-dark-background -z-10" />
-      
-      {/* Moving Background Shapes */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background to-background -z-10" />
+
+      {/* Moving Background Shapes — the two brand hues, kept to a considered pair */}
       <div className="absolute inset-0 overflow-hidden -z-20">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-brand-green/5 dark:bg-brand-green/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-10 w-64 h-64 bg-brand-blue/5 dark:bg-brand-blue/10 rounded-full blur-3xl animate-float" style={{
+        <div className="absolute top-20 left-10 w-64 h-64 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-accent2/5 dark:bg-accent2/10 rounded-full blur-3xl animate-float" style={{
         animationDelay: '2s'
-      }} />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-yellow/5 dark:bg-brand-yellow/10 rounded-full blur-3xl animate-float" style={{
-        animationDelay: '4s'
       }} />
       </div>
       
@@ -35,7 +32,7 @@ const Hero: React.FC = () => {
           <Logo size="lg" />
         </div>
         
-        <h1 className="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+        <h1 className="mt-8 text-display text-balance">
           <span className="block">Hi, I'm {portfolioData.personalInfo.name}</span>
           <div className="h-14 md:h-16 lg:h-20 overflow-hidden mt-2">
             {titles.map((title, index) => <div key={title} className="transition-all duration-500 transform" style={{

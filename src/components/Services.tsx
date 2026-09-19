@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import SectionHeading from '@/components/SectionHeading';
 import portfolioData from '@/data/portfolio.json';
 
 interface Service {
@@ -15,20 +16,19 @@ const Services: React.FC = () => {
   if (services.length === 0) return null;
 
   return (
-    <section id="services" className="py-20 bg-muted/30 dark:bg-dark-background/30">
+    <section id="services" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-3xl font-bold mb-2">Services I Offer</h2>
-          <div className="h-1 w-20 bg-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            Tailored software development and engineering solutions to solve complex problems
-          </p>
+        <div className="animate-fade-in">
+          <SectionHeading
+            title="Services I Offer"
+            description="Tailored software development and engineering solutions to solve complex problems"
+          />
         </div>
 
         <div className="max-w-4xl mx-auto">
           <Tabs defaultValue={services[0]?.title} className="w-full">
             <div className="flex justify-center mb-8">
-              <TabsList className="flex flex-wrap h-auto gap-2 p-1 bg-muted dark:bg-dark-card border border-border rounded-lg">
+              <TabsList className="flex flex-wrap h-auto gap-2 p-1 bg-muted border border-border rounded-lg">
                 {services.map((service) => (
                   <TabsTrigger 
                     key={service.title} 
@@ -43,7 +43,7 @@ const Services: React.FC = () => {
 
             {services.map((service, index) => (
               <TabsContent key={index} value={service.title} className="mt-0 animate-fade-in">
-                <Card className="border border-border dark:bg-dark-card shadow-lg">
+                <Card className="border border-border shadow-lg">
                   <CardContent className="p-8">
                     <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
                     <p className="text-lg text-muted-foreground mb-6 leading-relaxed">

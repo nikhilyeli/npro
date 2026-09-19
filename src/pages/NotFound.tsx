@@ -24,18 +24,18 @@ const NotFound: React.FC = () => {
   ];
   
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background dark:bg-dark-background p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
       <div className="w-full max-w-md">
         <div className="mb-6 flex justify-center">
           <Logo size="md" />
         </div>
-        
-        <div className="bg-console-bg text-console-text rounded-lg overflow-hidden border border-border shadow-xl">
+
+        <div className="bg-terminal-bg text-terminal-fg rounded-lg overflow-hidden border border-border shadow-xl">
           <div className="bg-black/40 flex items-center px-4 py-2 border-b border-border">
             <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-brand-red"></div>
-              <div className="w-3 h-3 rounded-full bg-brand-yellow"></div>
-              <div className="w-3 h-3 rounded-full bg-brand-green"></div>
+              <div className="w-3 h-3 rounded-full bg-terminal-red"></div>
+              <div className="w-3 h-3 rounded-full bg-terminal-yellow"></div>
+              <div className="w-3 h-3 rounded-full bg-terminal-green"></div>
             </div>
             <div className="ml-4 text-xs opacity-70">system ~ error</div>
           </div>
@@ -54,7 +54,7 @@ const NotFound: React.FC = () => {
               </div>
             ))}
             <div className="mt-6 flex items-center">
-              <span className="mr-2 text-brand-green">{'>'}</span>
+              <span className="mr-2 text-terminal-prompt">{'>'}</span>
               <span className="console-cursor"></span>
             </div>
           </div>

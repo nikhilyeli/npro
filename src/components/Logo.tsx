@@ -18,17 +18,17 @@ const Logo: React.FC<LogoProps> = ({
     md: 'h-12 w-12',
     lg: 'h-16 w-16',
   };
-  
+
   const handleClick = () => {
     const event = new CustomEvent('trigger-easter-egg', { detail: { type: 'google' } });
     window.dispatchEvent(event);
   };
-  
+
   return (
-    <div 
+    <div
       onClick={handleClick}
       className={cn(
-        'relative flex items-center justify-center rounded-md bg-gradient-to-br from-brand-green to-brand-blue cursor-pointer easteregg-google',
+        'relative flex items-center justify-center rounded-md bg-gradient-to-br from-primary to-accent2 cursor-pointer easteregg-google',
         sizes[size],
         variant === 'minimal' ? 'p-1' : 'p-2',
         className
@@ -40,7 +40,7 @@ const Logo: React.FC<LogoProps> = ({
         N
       </span>
       {variant === 'default' && (
-        <div className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full bg-brand-red animate-pulse-light" />
+        <div className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full bg-red-600 animate-pulse-light" />
       )}
     </div>
   );

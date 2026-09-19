@@ -8,48 +8,65 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* "Signal" — an ink-and-teal editor palette with a violet second accent,
+       replacing the generic green-on-near-black terminal look. */
+    --background: 210 25% 98%;
+    --foreground: 222 47% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 240 5.9% 90%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 172 66% 32%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 18% 93%;
+    --secondary-foreground: 222 47% 15%;
+    --muted: 222 16% 95%;
+    --muted-foreground: 222 12% 42%;
+    --accent: 262 55% 95%;
+    --accent-foreground: 262 45% 32%;
+    --accent-2: 262 70% 58%;
+    --destructive: 0 72% 48%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 142.1 76.2% 36.3%;
-    --radius: 0.5rem;
+    --border: 222 16% 88%;
+    --input: 222 16% 88%;
+    --ring: 172 66% 32%;
+    --radius: 0.625rem;
+
+    /* The terminal window is a fixed, always-dark object in both themes —
+       it reads as a real shell, not a page section. */
+    --terminal-bg: 224 35% 9%;
+    --terminal-fg: 210 20% 88%;
+    --terminal-muted: 218 14% 55%;
+    --terminal-prompt: 172 62% 55%;
+    --terminal-command: 262 70% 72%;
+    --terminal-highlight: 38 88% 60%;
+    --terminal-cursor: 0 0% 96%;
+    --terminal-red: 4 78% 62%;
+    --terminal-yellow: 38 88% 60%;
+    --terminal-green: 152 48% 48%;
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 0 0% 95%;
-    --card: 24 9.8% 10%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 85.7% 97.3%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 142.4 71.8% 29.2%;
+    --background: 224 39% 8%;
+    --foreground: 210 24% 92%;
+    --card: 224 32% 11%;
+    --card-foreground: 210 24% 92%;
+    --popover: 224 32% 10%;
+    --popover-foreground: 210 24% 92%;
+    --primary: 172 68% 46%;
+    --primary-foreground: 224 39% 8%;
+    --secondary: 224 22% 16%;
+    --secondary-foreground: 210 24% 92%;
+    --muted: 224 22% 15%;
+    --muted-foreground: 218 12% 63%;
+    --accent: 262 45% 22%;
+    --accent-foreground: 262 75% 86%;
+    --accent-2: 262 75% 68%;
+    --destructive: 0 62% 42%;
+    --destructive-foreground: 0 0% 97%;
+    --border: 224 22% 19%;
+    --input: 224 22% 19%;
+    --ring: 172 68% 46%;
   }
 }
 
@@ -81,45 +98,35 @@
 
   /* Console effects */
   .console-text {
-    @apply font-mono text-console-text;
+    @apply font-mono text-terminal-fg;
   }
-  
+
   .console-text-animated {
-    @apply font-mono text-console-text overflow-hidden whitespace-nowrap animate-typing;
+    @apply font-mono text-terminal-fg overflow-hidden whitespace-nowrap animate-typing;
   }
-  
+
   .console-cursor {
-    @apply inline-block w-1.5 h-5 bg-console-cursor animate-blink;
+    @apply inline-block w-1.5 h-5 bg-terminal-cursor animate-blink;
   }
-  
+
   /* Glass morphism */
   .glass {
     @apply backdrop-blur-md bg-white/10 dark:bg-black/30 border border-white/20 dark:border-white/10;
   }
-  
-  /* Gradient text */
+
+  /* Gradient text — the two brand hues, teal to violet */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-blue via-brand-green to-brand-yellow;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent2;
   }
 
   /* Skill card hover effect */
   .skill-card {
-    @apply transition-all duration-300 hover:scale-105 hover:shadow-lg;
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-glow;
   }
-  
+
   /* Project card hover */
   .project-card {
-    @apply transition-all duration-300 hover:-translate-y-2;
-  }
-  
-  /* Timeline connector */
-  .timeline-connector {
-    @apply absolute top-0 left-3.5 h-full w-0.5 bg-muted;
-  }
-  
-  /* Timeline dot */
-  .timeline-dot {
-    @apply absolute top-1.5 left-1.5 h-5 w-5 rounded-full bg-primary border-4 border-background dark:border-dark-background;
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-lifted;
   }
 }
 
