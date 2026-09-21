@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import SectionHeading from '@/components/SectionHeading';
 import portfolioData from '@/data/portfolio.json';
 
 interface Project {
@@ -32,15 +33,12 @@ const Projects: React.FC = () => {
   const hasDesign = projects.some(p => p.category === 'design');
 
   return (
-    <section id="projects" className="py-20 bg-background dark:bg-dark-background">
+    <section id="projects" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-2">Featured Projects</h2>
-          <div className="h-1 w-20 bg-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            A selection of my recent work across various domains
-          </p>
-        </div>
+        <SectionHeading
+          title="Featured Projects"
+          description="A selection of my recent work across various domains"
+        />
 
         <div className="max-w-6xl mx-auto">
           <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
@@ -62,6 +60,7 @@ const Projects: React.FC = () => {
                       <img
                         src={project.image}
                         alt={project.title}
+                        loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
@@ -83,13 +82,13 @@ const Projects: React.FC = () => {
                     </CardContent>
                     <CardFooter className="p-4 pt-0 flex gap-3">
                       {project.demoUrl && project.demoUrl !== "#" && project.demoUrl !== "" && (
-                        <Button variant="default" size="sm" onClick={() => window.open(project.demoUrl, '_blank')}>
-                          Live Demo
+                        <Button variant="default" size="sm" asChild>
+                          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">Live Demo</a>
                         </Button>
                       )}
                       {project.codeUrl && project.codeUrl !== "#" && project.codeUrl !== "" && (
-                        <Button variant="outline" size="sm" onClick={() => window.open(project.codeUrl, '_blank')}>
-                          View Code
+                        <Button variant="outline" size="sm" asChild>
+                          <a href={project.codeUrl} target="_blank" rel="noopener noreferrer">View Code</a>
                         </Button>
                       )}
                     </CardFooter>

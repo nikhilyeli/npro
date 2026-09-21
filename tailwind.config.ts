@@ -53,29 +53,42 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Custom brand colors
-				brand: {
-					green: '#4CAF50',
-					blue: '#2196F3',
-					yellow: '#FFC107',
-					red: '#F44336',
-				},
-				// Enhanced dark mode colors
-				dark: {
-					background: '#121212',
-					foreground: '#E0E0E0',
-					card: '#1E1E1E',
-					border: '#333333',
-				},
-				console: {
-					bg: '#121212',
-					text: '#4CAF50',
-					cursor: '#FFFFFF',
+				// Second brand hue (violet) — gradients, logo, punchy tags.
+				// Softer tint/text pair for badges & hovers lives at accent/accent-foreground.
+				accent2: 'hsl(var(--accent-2))',
+				// Status dot on the logo
+				live: 'hsl(var(--live-dot))',
+				// Roadmap states
+				success: 'hsl(var(--success))',
+				progress: 'hsl(var(--progress))',
+				// The terminal window is its own always-dark object in both themes,
+				// styled like a real shell rather than tracking the page palette.
+				terminal: {
+					bg: 'hsl(var(--terminal-bg))',
+					fg: 'hsl(var(--terminal-fg))',
+					muted: 'hsl(var(--terminal-muted))',
+					prompt: 'hsl(var(--terminal-prompt))',
+					command: 'hsl(var(--terminal-command))',
+					highlight: 'hsl(var(--terminal-highlight))',
+					cursor: 'hsl(var(--terminal-cursor))',
+					red: 'hsl(var(--terminal-red))',
+					yellow: 'hsl(var(--terminal-yellow))',
+					green: 'hsl(var(--terminal-green))',
 				}
 			},
+			fontSize: {
+				display: ['clamp(2.75rem, 6vw, 4.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '700' }],
+				'section-title': ['clamp(1.75rem, 3vw, 2.25rem)', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+			},
+			boxShadow: {
+				soft: '0 1px 2px hsl(var(--foreground) / 0.04), 0 1px 3px hsl(var(--foreground) / 0.06)',
+				lifted: '0 16px 30px -12px hsl(var(--foreground) / 0.22)',
+				glow: '0 0 0 1px hsl(var(--primary) / 0.25), 0 10px 30px -8px hsl(var(--primary) / 0.45)',
+			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
-				mono: ['"Fira Code"', 'monospace'],
+				// Brand themes swap these via --font-sans / --font-mono
+				sans: ['var(--font-sans)'],
+				mono: ['var(--font-mono)'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

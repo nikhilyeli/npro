@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
+import SectionHeading from '@/components/SectionHeading';
 import portfolioData from '@/data/portfolio.json';
 
 interface Achievement {
@@ -30,12 +31,9 @@ const Achievements: React.FC = () => {
   }));
 
   return (
-    <section id="achievements" className="py-20 bg-background dark:bg-dark-background">
+    <section id="achievements" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-2">Achievements & Publications</h2>
-          <div className="h-1 w-20 bg-primary mx-auto"></div>
-        </div>
+        <SectionHeading title="Achievements & Publications" />
         
         <div className="max-w-4xl mx-auto">
           <Tabs defaultValue="certifications">
@@ -104,7 +102,7 @@ const Achievements: React.FC = () => {
                         <h3 className="text-lg font-semibold">{item.title}</h3>
                         <p className="text-sm text-muted-foreground">{item.issuer} • {item.date}</p>
                       </div>
-                      <Badge variant="outline" className="bg-brand-blue/10 text-brand-blue border-brand-blue/20">Publication</Badge>
+                      <Badge variant="accent">Publication</Badge>
                     </CardHeader>
                     <CardContent className="p-4 pt-0">
                       {item.description && <p className="text-sm">{item.description}</p>}
