@@ -1,8 +1,11 @@
 import React from 'react';
 import Logo from './Logo';
 import portfolioData from '@/data/portfolio.json';
+import { FOOTER_EGG, triggerEgg } from '@/lib/easterEggs';
+import { useBrand } from '@/lib/brand';
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const brand = useBrand();
   const navItems = [{
     name: 'About',
     href: '#about'
@@ -31,7 +34,7 @@ const Footer: React.FC = () => {
         <div className="md:col-span-2">
           <div className="flex items-center gap-4 mb-4">
             <Logo size="sm" />
-            <span className="font-mono font-bold text-lg">npro</span>
+            <span className="font-mono font-bold text-lg">nPro</span>
           </div>
           <p className="text-muted-foreground max-w-md">
             {portfolioData.personalInfo.summary}
@@ -107,16 +110,10 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center">
+      <div className="mt-12 pt-8 border-t border-border text-center">
         <p className="text-sm text-muted-foreground">
           &copy; {currentYear} {portfolioData.personalInfo.firstName}'s Portfolio. All Rights Reserved.
         </p>
-
-        <div className="mt-4 sm:mt-0 flex gap-4 text-sm text-muted-foreground">
-          <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
-          <span>•</span>
-          <a href="#" className="hover:text-foreground transition-colors">Terms of Service</a>
-        </div>
       </div>
     </div>
 
@@ -124,14 +121,10 @@ const Footer: React.FC = () => {
     <div className="text-center pb-4 opacity-30 hover:opacity-100 transition-opacity">
       <button
         className="text-xs text-muted-foreground easteregg-microsoft"
-        onClick={() => {
-          console.log('Easter egg found! Check the console for a surprise.');
-          const event = new CustomEvent('trigger-easter-egg', { detail: { type: 'microsoft' } });
-          window.dispatchEvent(event);
-        }}
+        onClick={() => triggerEgg(FOOTER_EGG[brand])}
       >
         <span className="sr-only">Easter Egg</span>
-        ×××
+        &gt;.&lt;
       </button>
     </div>
   </footer>;

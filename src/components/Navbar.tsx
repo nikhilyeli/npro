@@ -2,20 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
+import BrandSwitcher from './BrandSwitcher';
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
+      // An open mobile menu shouldn't stay parked over content while the page scrolls
+      setMobileMenuOpen(false);
     };
-    window.addEventListener('scroll', handleScroll);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
   const navItems = [{
@@ -58,13 +62,15 @@ const Navbar: React.FC = () => {
           {navItems.map(item => <button key={item.name} onClick={() => scrollToSection(item.href)} className="text-sm font-medium hover:text-primary transition-colors">
               {item.name}
             </button>)}
+          <BrandSwitcher />
           <ThemeToggle />
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex md:hidden items-center gap-1">
+          <BrandSwitcher />
           <ThemeToggle />
-          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
+          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu" aria-expanded={mobileMenuOpen} aria-controls="mobile-menu">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
               {mobileMenuOpen ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />}
             </svg>
@@ -73,9 +79,9 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className={`md:hidden absolute w-full bg-background shadow-lg transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[80vh] opacity-100 overflow-y-auto' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+      <div id="mobile-menu" aria-hidden={!mobileMenuOpen} className={`md:hidden absolute w-full bg-background shadow-lg transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[80vh] opacity-100 overflow-y-auto' : 'max-h-0 opacity-0 overflow-hidden'}`}>
         <div className="container mx-auto px-4 py-4 flex flex-col space-y-3">
-          {navItems.map(item => <button key={item.name} onClick={() => scrollToSection(item.href)} className="text-left py-2 text-sm font-medium hover:text-primary transition-colors">
+          {navItems.map(item => <button key={item.name} tabIndex={mobileMenuOpen ? 0 : -1} onClick={() => scrollToSection(item.href)} className="text-left py-2 text-sm font-medium hover:text-primary transition-colors">
               {item.name}
             </button>)}
         </div>

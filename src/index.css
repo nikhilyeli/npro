@@ -44,6 +44,29 @@
     --terminal-red: 4 78% 62%;
     --terminal-yellow: 38 88% 60%;
     --terminal-green: 152 48% 48%;
+
+    /* The small "live / online" status dot on the logo — same in both themes */
+    --live-dot: 0 72% 51%;
+
+    /* Roadmap states (Experience). Completed = success, current = the progress set. */
+    --success: 152 48% 48%;
+    --progress: 38 92% 50%;
+    --progress-strong: 32 95% 44%;
+    --progress-ink: 23 83% 31%;
+    --progress-soft: 48 100% 96%;
+    --progress-mid: 48 96% 89%;
+    --progress-edge: 48 97% 77%;
+
+    /* Easter-egg confetti (plain hex: read by canvas code, not by Tailwind) */
+    --confetti-1: #26c5b0;
+    --confetti-2: #9d70eb;
+    --confetti-3: #f5b942;
+    --confetti-4: #ffffff;
+
+    /* Typography. Headings use --font-display, which is the sans font unless a theme sets a serif. */
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+    --font-display: var(--font-sans);
   }
 
   .dark {
@@ -68,6 +91,174 @@
     --input: 224 22% 19%;
     --ring: 172 68% 46%;
   }
+
+  /* ---------------------------------------------------------------------------
+     Brand theme: Microsoft ("Visual Purple", Fluent-inspired)
+     Visual Studio purple is the primary; Fluent blue is the second accent and the
+     "in progress" color. Spec: docs/microsoft-theme-guide.md
+     Light = :root[data-theme]; dark = the same plus .dark (higher specificity).
+     --------------------------------------------------------------------------- */
+  :root[data-theme="microsoft"] {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 14%;
+    --primary: 268 53% 37%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 14%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 38%;
+    --accent: 268 55% 95%;
+    --accent-foreground: 268 53% 30%;
+    --accent-2: 206 100% 38%;
+    --destructive: 359 62% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 268 53% 37%;
+    --radius: 0.5rem;
+
+    /* Windows PowerShell window */
+    --terminal-bg: 215 98% 17%;
+    --terminal-fg: 260 8% 94%;
+    --terminal-muted: 215 20% 65%;
+    --terminal-prompt: 54 88% 81%;
+    --terminal-command: 180 58% 62%;
+    --terminal-highlight: 54 88% 81%;
+    --terminal-cursor: 0 0% 96%;
+    --terminal-red: 355 80% 62%;
+    --terminal-yellow: 54 88% 81%;
+    --terminal-green: 120 45% 55%;
+
+    --success: 120 77% 28%;
+    /* Roadmap "in progress": Fluent blue */
+    --progress: 206 100% 42%;
+    --progress-strong: 206 100% 36%;
+    --progress-ink: 208 80% 24%;
+    --progress-soft: 206 100% 97%;
+    --progress-mid: 206 100% 93%;
+    --progress-edge: 206 100% 84%;
+
+    --confetti-1: #7b4fc0;
+    --confetti-2: #0078d4;
+    --confetti-3: #ffb900;
+    --confetti-4: #ffffff;
+
+    --font-sans: 'Segoe UI Variable Text', 'Segoe UI', system-ui, -apple-system, 'Inter', Roboto, sans-serif;
+    --font-mono: 'Cascadia Code', 'Cascadia Mono', 'Fira Code', Consolas, monospace;
+  }
+
+  :root[data-theme="microsoft"].dark {
+    --background: 0 0% 12%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 16%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 14%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 261 69% 71%;
+    --primary-foreground: 0 0% 6%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 68%;
+    --accent: 268 35% 22%;
+    --accent-foreground: 268 80% 88%;
+    --accent-2: 210 90% 62%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 26%;
+    --input: 0 0% 26%;
+    --ring: 261 69% 71%;
+
+    --success: 120 40% 45%;
+
+    --confetti-1: #a480e8;
+    --confetti-2: #479ef5;
+  }
+
+  /* ---------------------------------------------------------------------------
+     Brand theme: Anthropic (warm cream, clay orange, editorial serif headings)
+     Inspired by, not affiliated with, Anthropic. Spec: docs/anthropic-theme-guide.md
+     --------------------------------------------------------------------------- */
+  :root[data-theme="anthropic"] {
+    --background: 50 20% 95%;
+    --foreground: 60 4% 8%;
+    --card: 48 33% 97%;
+    --card-foreground: 60 4% 8%;
+    --popover: 48 33% 97%;
+    --popover-foreground: 60 4% 8%;
+    --primary: 16 59% 44%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 48 20% 90%;
+    --secondary-foreground: 60 4% 12%;
+    --muted: 48 18% 92%;
+    --muted-foreground: 60 5% 36%;
+    --accent: 20 55% 93%;
+    --accent-foreground: 16 59% 30%;
+    --accent-2: 209 42% 42%;
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 48 15% 84%;
+    --input: 48 15% 84%;
+    --ring: 16 59% 44%;
+    --radius: 0.75rem;
+
+    /* Terminal: warm dark, orange prompt */
+    --terminal-bg: 30 3% 12%;
+    --terminal-fg: 48 25% 92%;
+    --terminal-muted: 45 8% 60%;
+    --terminal-prompt: 15 62% 59%;
+    --terminal-command: 41 55% 84%;
+    --terminal-highlight: 15 62% 59%;
+    --terminal-cursor: 15 62% 59%;
+    --terminal-red: 4 70% 62%;
+    --terminal-yellow: 41 55% 70%;
+    --terminal-green: 93 28% 55%;
+
+    --success: 93 28% 34%;
+    --progress: 16 59% 44%;
+    --progress-strong: 16 62% 38%;
+    --progress-ink: 16 60% 22%;
+    --progress-soft: 30 60% 96%;
+    --progress-mid: 30 62% 92%;
+    --progress-edge: 28 60% 84%;
+
+    --confetti-1: #d97757;
+    --confetti-2: #6a9bcc;
+    --confetti-3: #ebdbbc;
+    --confetti-4: #788c5d;
+
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  }
+
+  :root[data-theme="anthropic"].dark {
+    --background: 60 3% 12%;
+    --foreground: 48 25% 92%;
+    --card: 60 3% 16%;
+    --card-foreground: 48 25% 92%;
+    --popover: 60 3% 14%;
+    --popover-foreground: 48 25% 92%;
+    --primary: 17 67% 67%;
+    --primary-foreground: 60 4% 8%;
+    --secondary: 60 3% 20%;
+    --secondary-foreground: 48 25% 92%;
+    --muted: 60 3% 18%;
+    --muted-foreground: 45 8% 66%;
+    --accent: 18 35% 22%;
+    --accent-foreground: 20 70% 88%;
+    --accent-2: 208 45% 65%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 60 3% 25%;
+    --input: 60 3% 25%;
+    --ring: 17 67% 67%;
+
+    --success: 93 30% 50%;
+  }
 }
 
 @layer base {
@@ -77,6 +268,10 @@
   
   html {
     @apply scroll-smooth;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
   }
   
   body {
@@ -127,6 +322,50 @@
   /* Project card hover */
   .project-card {
     @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-lifted;
+  }
+}
+
+/* Microsoft theme: Fluent "Pivot" tabs (text tabs with an underline) instead of the pill style */
+:root[data-theme="microsoft"] [role="tablist"] {
+  height: auto;
+  padding: 0;
+  gap: 0.25rem;
+  background: transparent;
+  border-bottom: 1px solid hsl(var(--border));
+  border-radius: 0;
+}
+:root[data-theme="microsoft"] [role="tab"] {
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  box-shadow: none;
+}
+:root[data-theme="microsoft"] [role="tab"][data-state="active"] {
+  background: transparent;
+  color: hsl(var(--primary));
+  border-bottom-color: hsl(var(--primary));
+  box-shadow: none;
+}
+
+/* Terminal pets: hearts and speech bubble */
+@keyframes pet-heart {
+  0% { opacity: 0; transform: translateY(0) scale(0.6); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-34px) scale(1.1); }
+}
+@keyframes pet-hop {
+  0%, 100% { transform: translateY(0); }
+  35% { transform: translateY(-14px); }
+  65% { transform: translateY(-4px); }
+}
+
+/* Respect users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

@@ -10,6 +10,7 @@ import Achievements from '@/components/Achievements';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Services from '@/components/Services';
+import EasterEggs from '@/components/EasterEggs';
 import { Toaster } from '@/components/ui/toaster';
 
 const Index = () => {
@@ -19,7 +20,7 @@ const Index = () => {
   useEffect(() => {
     console.clear();
     console.log('%c Welcome to my portfolio! ', 'background: #0C111C; color: #26C5B0; font-size: 20px; font-weight: bold; padding: 10px;');
-    console.log('%c Feel free to explore the code. There might be some easter eggs hidden around! ', 'color: #9D70EB; font-size: 14px;');
+    console.log('%c Feel free to explore the code. There are easter eggs hidden around. Hint:↑ ↑ ↓ ↓ ← → ← → B A ', 'color: #9D70EB; font-size: 14px;');
     
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -58,6 +59,7 @@ const Index = () => {
       </main>
       
       <Footer />
+      <EasterEggs />
       <Toaster />
     </>
   );

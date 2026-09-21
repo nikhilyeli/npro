@@ -56,6 +56,11 @@ export default {
 				// Second brand hue (violet) — gradients, logo, punchy tags.
 				// Softer tint/text pair for badges & hovers lives at accent/accent-foreground.
 				accent2: 'hsl(var(--accent-2))',
+				// Status dot on the logo
+				live: 'hsl(var(--live-dot))',
+				// Roadmap states
+				success: 'hsl(var(--success))',
+				progress: 'hsl(var(--progress))',
 				// The terminal window is its own always-dark object in both themes,
 				// styled like a real shell rather than tracking the page palette.
 				terminal: {
@@ -81,8 +86,9 @@ export default {
 				glow: '0 0 0 1px hsl(var(--primary) / 0.25), 0 10px 30px -8px hsl(var(--primary) / 0.45)',
 			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
-				mono: ['"Fira Code"', 'monospace'],
+				// Brand themes swap these via --font-sans / --font-mono
+				sans: ['var(--font-sans)'],
+				mono: ['var(--font-mono)'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

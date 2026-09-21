@@ -18,7 +18,7 @@ const badgeVariants = cva(
         accent:
           "border border-accent2/30 bg-accent2/10 text-accent2 hover:bg-accent2/20",
         success:
-          "border border-terminal-green/30 bg-terminal-green/10 text-terminal-green hover:bg-terminal-green/20",
+          "border border-success/30 bg-success/10 text-success hover:bg-success/20",
       },
     },
     defaultVariants: {

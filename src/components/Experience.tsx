@@ -30,7 +30,7 @@ const getRoadmapState = (period: string): RoadmapState =>
 
 const RoadmapIcon: React.FC<{ state: RoadmapState }> = ({ state }) =>
   state === 'completed' ? (
-    <div className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-terminal-green">
+    <div className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-success" role="img" aria-label="Completed">
       <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
         <path d="M20 6 9 17l-5-5" />
       </svg>
@@ -40,9 +40,10 @@ const RoadmapIcon: React.FC<{ state: RoadmapState }> = ({ state }) =>
     <div
       className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
       style={{
-        background: 'radial-gradient(circle at 40% 35%, #fffbeb 0%, #fef3c7 55%, #fde68a 100%)',
-        boxShadow: '0 0 0 2.5px #f59e0b66, 0 2px 8px #f59e0b33',
+        background: 'radial-gradient(circle at 40% 35%, hsl(var(--progress-soft)) 0%, hsl(var(--progress-mid)) 55%, hsl(var(--progress-edge)) 100%)',
+        boxShadow: '0 0 0 2.5px hsl(var(--progress) / 0.4), 0 2px 8px hsl(var(--progress) / 0.2)',
       }}
+      role="img"
       aria-label="In progress"
     >
       <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
@@ -53,24 +54,23 @@ const RoadmapIcon: React.FC<{ state: RoadmapState }> = ({ state }) =>
           }
         `}</style>
         {/* Faint full circle track */}
-        <circle cx="12" cy="12" r="10" stroke="#f59e0b" strokeWidth="1.2" opacity="0.18" />
+        <circle cx="12" cy="12" r="10" strokeWidth="1.2" opacity="0.18" style={{ stroke: 'hsl(var(--progress))' }} />
         {/* Revolving solid progress arc — download/spinner style ~75% filled */}
         <circle
           cx="12" cy="12" r="10"
-          stroke="#d97706"
           strokeWidth="2.2"
           strokeLinecap="round"
           strokeDasharray="47 16"
-          style={{ transformOrigin: '12px 12px', animation: 'npro-arc-spin 1.6s linear infinite' }}
+          style={{ stroke: 'hsl(var(--progress-strong))', transformOrigin: '12px 12px', animation: 'npro-arc-spin 1.6s linear infinite' }}
         />
         {/* Centred tick / checkmark */}
         <path
           d="M8 12.5 l3 3 5-6"
-          stroke="#92400e"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
+          style={{ stroke: 'hsl(var(--progress-ink))' }}
         />
       </svg>
     </div>
@@ -131,7 +131,7 @@ const Experience: React.FC = () => {
                       <div className="flex flex-col items-center mr-6">
                         {isFirst && <RoadmapFadeHead />}
                         <RoadmapIcon state={state} />
-                        {isLast ? <RoadmapFadeTail /> : <div className="w-0.5 flex-1 bg-terminal-green" />}
+                        {isLast ? <RoadmapFadeTail /> : <div className="w-0.5 flex-1 bg-success" />}
                       </div>
 
                       <div className="flex-1 pb-12">
@@ -200,7 +200,7 @@ const Experience: React.FC = () => {
                       <div className="flex flex-col items-center mr-6">
                         {isFirst && <RoadmapFadeHead />}
                         <RoadmapIcon state={state} />
-                        {isLast ? <RoadmapFadeTail /> : <div className="w-0.5 flex-1 bg-terminal-green" />}
+                        {isLast ? <RoadmapFadeTail /> : <div className="w-0.5 flex-1 bg-success" />}
                       </div>
 
                       <div className="flex-1 pb-12">

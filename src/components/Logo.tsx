@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { LOGO_EGG, triggerEgg } from '@/lib/easterEggs';
+import { useBrand } from '@/lib/brand';
 
 interface LogoProps {
   className?: string;
@@ -19,10 +21,8 @@ const Logo: React.FC<LogoProps> = ({
     lg: 'h-16 w-16',
   };
 
-  const handleClick = () => {
-    const event = new CustomEvent('trigger-easter-egg', { detail: { type: 'google' } });
-    window.dispatchEvent(event);
-  };
+  const brand = useBrand();
+  const handleClick = () => triggerEgg(LOGO_EGG[brand]);
 
   return (
     <div
@@ -40,7 +40,7 @@ const Logo: React.FC<LogoProps> = ({
         N
       </span>
       {variant === 'default' && (
-        <div className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full bg-red-600 animate-pulse-light" />
+        <div className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full bg-live animate-pulse-light" />
       )}
     </div>
   );
