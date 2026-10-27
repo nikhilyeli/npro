@@ -6,7 +6,7 @@ import { EGG_EVENT, EggDetail, EggType, eggsForBrand, triggerEgg } from '@/lib/e
 import { isMuted, playSound, setMuted } from '@/lib/sound';
 import { useNavigate } from 'react-router-dom';
 import { BRANDS, type BrandId, getBrand, isBrandId, routeFor, useBrand, useThemeSwitcherEnabled } from '@/lib/brand';
-import TerminalPet, { type PetKind } from '@/components/TerminalPet';
+import TerminalPet, { type PetKind, isPetEnabled, setPetEnabled, usePetEnabled } from '@/components/TerminalPet';
 
 // How the terminal looks in each theme
 interface TerminalSkin {
@@ -17,9 +17,17 @@ interface TerminalSkin {
 }
 
 const SKINS: Record<BrandId, TerminalSkin> = {
-  signal: { prompt: 'nikhil@portfolio ~ %', title: 'nikhil@portfolio ~ terminal', chrome: 'mac' },
+  signal: { prompt: 'nikhil@portfolio ~ %', title: 'nikhil@portfolio ~ terminal', chrome: 'mac', pet: 'ping' },
   microsoft: { prompt: 'PS C:\\nikhil>', title: 'Windows PowerShell', chrome: 'windows', pet: 'duck' },
   anthropic: { prompt: '>', title: 'nikhil ✻ terminal', chrome: 'mac', pet: 'critter' },
+  google: { prompt: 'nikhil@cloudshell:~$', title: 'Cloud Shell', chrome: 'mac', pet: 'dino' },
+  apple: { prompt: 'nikhil@mac ~ %', title: 'nikhil — zsh — 80×24', chrome: 'mac', pet: 'siri' },
+  meta: { prompt: 'nikhil@dev ~ $', title: 'nikhil · dev', chrome: 'mac', pet: 'metaai' },
+  netflix: { prompt: 'nikhil@stream ~ $', title: 'nikhil · now playing', chrome: 'mac', pet: 'reel' },
+  amazon: { prompt: 'nikhil@ops ~ $', title: 'nikhil · ops console', chrome: 'mac', pet: 'box' },
+  openai: { prompt: 'nikhil@openai ~ %', title: 'nikhil · console', chrome: 'mac', pet: 'bot' },
+  syntax: { prompt: 'nikhil@dev:~$', title: 'nikhil — syntax', chrome: 'mac', pet: 'cursor' },
+  atelier: { prompt: 'nikhil@atelier ~ %', title: 'nikhil · atelier', chrome: 'mac', pet: 'sprout' },
 };
 
 // Typed command -> easter egg. An egg only fires if the current theme has it (see eggsForBrand).
@@ -29,13 +37,33 @@ const COMMAND_EGGS: Record<string, EggType> = {
   confetti: 'confetti',
   fidget: 'fidget', spinner: 'fidget',
   bugs: 'bugs', game: 'bugs',
-  deploy: 'deploy', 'az deploy': 'deploy', 'azd up': 'deploy',
+  deploy: 'deploy', 'az deploy': 'deploy', 'azd up': 'deploy', 'gcloud deploy': 'deploy', 'ship --carefully': 'deploy',
   coffee: 'coffee',
   motivate: 'motivate',
   hire: 'hire', 'hire nikhil': 'hire', 'sudo hire nikhil': 'hire', 'runas hire nikhil': 'hire',
   pet: 'pet',
   winver: 'winver', bsod: 'bsod', clippy: 'clippy', dotnet: 'dotnet', 'dotnet run': 'dotnet',
   think: 'think', claude: 'think', haiku: 'haiku',
+  dino: 'dino', run: 'dino', offline: 'dino',
+  recursion: 'recursion',
+  lighthouse: 'lighthouse',
+  doodle: 'doodle',
+  kubectl: 'kubectl',
+  neofetch: 'neofetch',
+  swiftrun: 'swiftrun', 'swift run': 'swiftrun',
+  reactions: 'reactions', like: 'reactions',
+  reacttree: 'reacttree', react: 'reacttree',
+  movefast: 'movefast', 'move-fast': 'movefast',
+  play: 'play', resume: 'play',
+  top10: 'top10',
+  day1: 'day1',
+  metrics: 'metrics',
+  tokens: 'tokens',
+  align: 'align',
+  format: 'format',
+  lint: 'lint',
+  develop: 'develop',
+  note: 'note',
 };
 
 interface TerminalLine {
@@ -68,9 +96,9 @@ const Console: React.FC = () => {
   const prompt = skin.prompt;
   // The `theme` command exists only while the theme tools are on (see src/lib/brand.ts)
   const themeToolsOn = useThemeSwitcherEnabled();
+  const petEnabled = usePetEnabled();
   const navigate = useNavigate();
 
-  const [text, setText] = useState<string[]>([]);
   const [isTyping, setIsTyping] = useState(true);
   const [visibleText, setVisibleText] = useState<string[]>([]);
   
@@ -108,77 +136,69 @@ const Console: React.FC = () => {
   ];
 
   useEffect(() => {
-    // Reset state, then run the typing sequence exactly once on mount.
-    setText([]);
+    // Reset state, then type each line to completion, in order, exactly once on mount.
+    // (Previously two effects raced — a new line could start before the last one finished
+    // typing, leaving several lines frozen mid-word. Typing one line fully before starting
+    // the next fixes that.)
     setVisibleText([]);
     setIsTyping(true);
     setIsInteractive(false);
 
-    let line = 0;
-    let timer: ReturnType<typeof setInterval>;
+    let cancelled = false;
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const finishBoot = () => {
+      setIsTyping(false);
+      const initialHistory: TerminalLine[] = consoleLines.map(l => {
+        const isCmd = l.startsWith('>');
+        return {
+          type: isCmd ? 'command' : 'output',
+          text: isCmd ? l.substring(2) : l
+        };
+      });
+      setTerminalHistory([
+        ...initialHistory,
+        { type: 'output', text: '\nTerminal active. Type "help" to see available commands.' }
+      ]);
+      setIsInteractive(true);
+    };
+
+    const typeLine = (lineIndex: number) => {
+      if (cancelled) return;
+      if (lineIndex >= consoleLines.length) {
+        finishBoot();
+        return;
+      }
+      const line = consoleLines[lineIndex];
+      setVisibleText(prev => {
+        const next = [...prev];
+        next[lineIndex] = '';
+        return next;
+      });
+      let chars = 0;
+      const typeChar = () => {
+        if (cancelled) return;
+        chars++;
+        setVisibleText(prev => {
+          const next = [...prev];
+          next[lineIndex] = line.substring(0, chars);
+          return next;
+        });
+        timeoutId = setTimeout(chars < line.length ? typeChar : () => typeLine(lineIndex + 1), chars < line.length ? 12 : 70);
+      };
+      typeChar();
+    };
 
     // Add a delay before typing starts
-    const startTimeout = setTimeout(() => {
-      timer = setInterval(() => {
-        if (line < consoleLines.length) {
-          const nextLine = consoleLines[line];
-          line++;
-          setText(prev => [...prev, nextLine]);
-        } else {
-          setIsTyping(false);
-          clearInterval(timer);
-
-          // Transition to interactive CLI terminal
-          const initialHistory: TerminalLine[] = consoleLines.map(l => {
-            const isCmd = l.startsWith('>');
-            return {
-              type: isCmd ? 'command' : 'output',
-              text: isCmd ? l.substring(2) : l
-            };
-          });
-
-          setTerminalHistory([
-            ...initialHistory,
-            { type: 'output', text: '\nTerminal active. Type "help" to see available commands.' }
-          ]);
-          setIsInteractive(true);
-        }
-      }, 200);
-    }, 500);
+    const startTimeout = setTimeout(() => typeLine(0), 500);
 
     return () => {
+      cancelled = true;
       clearTimeout(startTimeout);
-      clearInterval(timer);
+      clearTimeout(timeoutId);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // Type animation effect
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-    
-    if (text.length > 0 && isTyping) {
-      const lastLine = text[text.length - 1];
-      if (!lastLine) return;
-      let visibleChars = 0;
-      
-      const typeChar = () => {
-        if (visibleChars <= lastLine.length) {
-          setVisibleText(prev => {
-            const newArr = [...prev];
-            newArr[text.length - 1] = lastLine.substring(0, visibleChars);
-            return newArr;
-          });
-          visibleChars++;
-          timeoutId = setTimeout(typeChar, 15);
-        }
-      };
-      
-      typeChar();
-    }
-    
-    return () => clearTimeout(timeoutId);
-  }, [text, isTyping]);
 
   // Handle Easter Egg Event Listeners
   useEffect(() => {
@@ -294,10 +314,152 @@ const Console: React.FC = () => {
             command: 'ship --carefully',
             steps: ['✔ Evals passed', '✔ Safety checks passed', '✔ Docs updated', '✔ Rolled out gradually', '[System Surprise: Shipped. Thoughtfully. 🌱]'],
           },
+          google: {
+            command: 'gcloud deploy',
+            steps: ['✔ Build container', '✔ Push to registry', '✔ 128/128 tests passed', '✔ Rolled out to 100% of traffic', '[System Surprise: Shipped to the cloud. Zero downtime!]'],
+          },
+          apple: {
+            command: 'xcodebuild archive',
+            steps: ['✔ Compiling Swift sources', '✔ Running unit tests', '✔ Archiving', '✔ Upload succeeded', '[System Surprise: Ready for review. Shipped!]'],
+          },
+          meta: {
+            command: 'deploy --canary',
+            steps: ['✔ Lint passed', '✔ Jest: 128/128 passed', '✔ Build succeeded', '✔ Canary 1% → 100%', '[System Surprise: Shipped. Zero downtime!]'],
+          },
+          netflix: {
+            command: 'deploy',
+            steps: ['✔ Build encoded', '✔ 128/128 tests passed', '✔ Now streaming in 190 countries (pretend)', '[System Surprise: Shipped. Zero downtime!]'],
+          },
+          amazon: {
+            command: 'deploy',
+            steps: ['✔ Build packaged', '✔ Canary rollout', '✔ Rolled out across all fulfillment centers (pretend)', '[System Surprise: Shipped. Zero downtime!]'],
+          },
+          openai: {
+            command: 'deploy',
+            steps: ['✔ Evals passed', '✔ Safety checks passed', '✔ Rolled out gradually', '[System Surprise: Shipped. Zero downtime!]'],
+          },
+          syntax: {
+            command: 'build && deploy',
+            steps: ['✔ Restore packages', '✔ Build succeeded, 0 warnings', '✔ 128/128 tests passed', '✔ Deployed', '[System Surprise: Shipped. Zero downtime!]'],
+          },
+          atelier: {
+            command: 'publish gallery',
+            steps: ['✔ Export originals', '✔ Color grade applied', '✔ Gallery published', '[System Surprise: Shared. Zero downtime! 🌿]'],
+          },
         };
         runSteps(pipelines[brand].command, pipelines[brand].steps);
         return;
       }
+      case 'recursion':
+        runSteps('recursion', ['Did you mean: recursion?', 'Did you mean: recursion?'], 900, 500);
+        return;
+      case 'lighthouse':
+        runSteps(
+          'lighthouse',
+          ['Running audit...', 'Performance:      100', 'Accessibility:    100', 'Best Practices:   100', 'SEO:              100', '[System Surprise: Perfect score. As it should be.]'],
+          420
+        );
+        return;
+      case 'doodle':
+        lines = ['🎨 Today\'s doodle: "A Portfolio, celebrating open source."', ' '];
+        break;
+      case 'kubectl':
+        runSteps(
+          'kubectl get pods',
+          [
+            'NAME                    READY   STATUS    RESTARTS',
+            'portfolio-frontend-7f8  1/1     Running   0',
+            'portfolio-api-2c9       1/1     Running   0',
+            'portfolio-worker-9a1    1/1     Running   0',
+            '[System Surprise: All pods healthy.]',
+          ],
+          380
+        );
+        return;
+      case 'neofetch':
+        lines = [
+          ' ',
+          'nikhil@mac',
+          '----------',
+          'OS: nPro',
+          'Kernel: React 18.3',
+          'Shell: zsh',
+          'Terminal: nikhil@mac ~ zsh',
+          'CPU: Coffee-fueled',
+          'Memory: Always learning',
+          'Uptime: 4+ years',
+          ' ',
+        ];
+        break;
+      case 'swiftrun':
+        runSteps('swift run', ['Compiling nPro...', 'Build complete! (1.2s)', 'Hello, world!'], 420);
+        return;
+      case 'reactions':
+        lines = ['👍 ❤️ 😆 😮 sent!', ' '];
+        break;
+      case 'reacttree':
+        lines = [
+          ' ',
+          '<Portfolio>',
+          '  <Hero />',
+          '  <Console />',
+          '  <Projects />',
+          '  <Experience />',
+          '✔ Hydrated in 42ms',
+          ' ',
+        ];
+        break;
+      case 'movefast':
+        runSteps('move fast', ['Moving fast...', '(and testing the important parts)', '✔ Shipped.'], 260, 150);
+        return;
+      case 'dino':
+        lines = ['🦖 Dino Runner opened. Jump with Space or tap. Duck with ↓.', ' '];
+        break;
+      case 'play':
+        lines = ['▶ Continue watching Nikhil\'s Portfolio — S1E1: About Me', ' '];
+        break;
+      case 'top10':
+        lines = [
+          ' ',
+          'Top 10 in Skills today:',
+          ...portfolioData.skills.slice(0, 10).map((s, i) => `${i + 1}. ${s.name}`),
+          ' ',
+        ];
+        break;
+      case 'day1':
+        lines = ["It's always Day 1. Stay customer-obsessed, then ship.", ' '];
+        break;
+      case 'metrics': {
+        const uptime = '99.99%';
+        const p99 = '128ms';
+        lines = [
+          ' ',
+          'Illustrative dashboard (not a real production metric):',
+          `  uptime:      ${uptime}`,
+          `  p99 latency: ${p99}`,
+          '  deploys/week: 12',
+          ' ',
+        ];
+        break;
+      }
+      case 'tokens':
+        runSteps('tokens', ['Counting tokens...', 'Thinking, one token at a time...', '[System Surprise: Context loaded. Ready to hire.]'], 380);
+        return;
+      case 'align':
+        lines = ['🎯 Aligning incentives: hire the good engineer.', ' '];
+        break;
+      case 'format':
+        lines = ['Formatted 1 file in 12ms. :)', ' '];
+        break;
+      case 'lint':
+        lines = ['✓ 0 problems, 0 warnings.', ' '];
+        break;
+      case 'develop':
+        runSteps('develop', ['Exposing...', 'Developing...', 'Fixing...', 'Ready. 🌿'], 480);
+        return;
+      case 'note':
+        lines = ['🖊️ "made with care"', ' '];
+        break;
       case 'google':
         art = [
           '   ____   ___    ___    ____  _      _____ ',
@@ -356,7 +518,8 @@ const Console: React.FC = () => {
     // Easter eggs: only the ones this theme has (eggsForBrand). `easteregg` is a hidden random pick.
     const available = eggsForBrand(brand);
     const randomPool = available.filter(t => t !== 'pet');
-    const egg = cleanCmd === 'easteregg' ? randomPool[Math.floor(Math.random() * randomPool.length)] : COMMAND_EGGS[cleanCmd];
+    const isRandomCmd = cleanCmd === 'easteregg' || ((cleanCmd === 'lucky' || cleanCmd === 'feeling-lucky') && brand === 'google');
+    const egg = isRandomCmd ? randomPool[Math.floor(Math.random() * randomPool.length)] : COMMAND_EGGS[cleanCmd];
     if (egg && available.includes(egg)) {
       if (egg === 'pet') {
         setTerminalHistory(prev => [...prev, { type: 'command', text: cmd }, { type: 'output', text: '🐾 You gave your pet a pat.' }]);
@@ -377,6 +540,7 @@ const Console: React.FC = () => {
           '  contact     - Contact and social links',
           ...(themeToolsOn ? ['  theme       - List or switch site themes (e.g. theme microsoft)'] : []),
           '  sound       - Turn sound effects on or off',
+          '  pets        - Show or hide the terminal pet (pets on / pets off)',
           '  clear       - Clear the screen',
           ' ',
           '💡 Psst... there are hidden easter eggs on this site. Try the logo, the footer, and some unusual commands.'
@@ -434,6 +598,15 @@ const Console: React.FC = () => {
         setMuted(nowMuted);
         if (!nowMuted) playSound('pop');
         response = [nowMuted ? '🔇 Sound effects off.' : '🔊 Sound effects on.'];
+        break;
+      }
+      case 'pets':
+      case 'pets on':
+      case 'pets off': {
+        const nextEnabled = cleanCmd === 'pets on' ? true : cleanCmd === 'pets off' ? false : !isPetEnabled();
+        setPetEnabled(nextEnabled);
+        if (nextEnabled) playSound('pop');
+        response = [nextEnabled ? '🐾 Pet enabled. Look for it under the terminal.' : '🐾 Pet hidden. Type "pets on" to bring it back.'];
         break;
       }
       default:
@@ -550,7 +723,7 @@ const Console: React.FC = () => {
                 )}
               </div>
 
-              {skin.pet && <TerminalPet kind={skin.pet} />}
+              {skin.pet && petEnabled && <TerminalPet kind={skin.pet} />}
             </CardContent>
           </Card>
           

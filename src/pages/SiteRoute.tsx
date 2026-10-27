@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import Index from '@/pages/Index';
 import NotFound from '@/pages/NotFound';
-import { COMPANY_BRAND_IDS } from '@/lib/brandIds';
+import { COMPANY_BRAND_IDS, ROUTE_ALIASES } from '@/lib/brandIds';
 import {
   DEFAULT_BRAND,
   type BrandId,
@@ -17,13 +17,19 @@ import {
 // One route element for /npro and /npro/:company, so moving between themes never remounts the page.
 //   /npro            -> Signal
 //   /npro/microsoft  -> Microsoft, and the session is locked to that company
-// Locked sessions are sent back to their company. The lock is ignored while the theme tools are on.
+//   /npro/gemini     -> an alias: resolves to the same brand as /npro/google, then canonicalizes the URL
+// Whether a route 404s depends only on the route/alias tables (COMPANY_BRAND_IDS / ROUTE_ALIASES) —
+// never on the session lock. Locked sessions are sent back to their company, whether they typed the
+// canonical name or an alias for a different one. The lock is ignored while the theme tools are on.
 const SiteRoute: React.FC = () => {
   const { company } = useParams();
   const themeToolsOn = useThemeSwitcherEnabled();
 
-  // null = not a known company route
-  const brand: BrandId | null = company === undefined ? DEFAULT_BRAND : COMPANY_BRAND_IDS.find(id => id === company) ?? null;
+  const isKnownId = company !== undefined && COMPANY_BRAND_IDS.some(id => id === company);
+  const aliasTarget = company !== undefined && !isKnownId ? ROUTE_ALIASES[company.toLowerCase()] : undefined;
+
+  // null = not a known company route AND not a recognized alias -> 404, regardless of any lock.
+  const brand: BrandId | null = company === undefined ? DEFAULT_BRAND : isKnownId ? (company as BrandId) : aliasTarget ?? null;
   const lock = themeToolsOn ? null : getCompanyLock();
   const blocked = brand !== null && lock !== null && brand !== lock;
 
@@ -41,6 +47,7 @@ const SiteRoute: React.FC = () => {
 
   if (brand === null) return <NotFound />;
   if (blocked && lock) return <Navigate to={routeFor(lock)} replace />;
+  if (aliasTarget !== undefined) return <Navigate to={routeFor(aliasTarget)} replace />;
   return <Index />;
 };
 

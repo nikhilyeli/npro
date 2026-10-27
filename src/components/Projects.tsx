@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import SectionHeading from '@/components/SectionHeading';
 import portfolioData from '@/data/portfolio.json';
+import { useBrand } from '@/lib/brand';
+import { getVariant, orderByIds } from '@/lib/variants';
 
 interface Project {
   id: number;
@@ -20,8 +22,9 @@ interface Project {
 
 const Projects: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('all');
+  const brand = useBrand();
 
-  const projects: Project[] = portfolioData.projects as Project[];
+  const projects: Project[] = orderByIds(portfolioData.projects as Project[], getVariant(brand)?.projectOrder);
 
   const filteredProjects = activeTab === 'all'
     ? projects

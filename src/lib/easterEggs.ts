@@ -5,6 +5,8 @@
 import type { BrandId } from './brandIds';
 
 export type EggType =
+  // 'google' here is a Signal-theme easter egg (the logo/matrix ASCII art), unrelated to the
+  // Google BRAND theme below — the name predates the Google theme and was kept for compatibility.
   | 'google'
   | 'microsoft'
   | 'confetti'
@@ -20,31 +22,93 @@ export type EggType =
   | 'clippy'
   | 'dotnet'
   | 'think'
-  | 'haiku';
+  | 'haiku'
+  // Google theme
+  | 'dino'
+  | 'recursion'
+  | 'lighthouse'
+  | 'doodle'
+  | 'kubectl'
+  // Apple theme
+  | 'neofetch'
+  | 'swiftrun'
+  // Meta theme
+  | 'reactions'
+  | 'reacttree'
+  | 'movefast'
+  // Netflix theme
+  | 'play'
+  | 'top10'
+  // Amazon theme
+  | 'day1'
+  | 'metrics'
+  // OpenAI theme
+  | 'tokens'
+  | 'align'
+  // Syntax theme (not a company — a design-language theme)
+  | 'format'
+  | 'lint'
+  // Atelier theme (not a company — a design-language theme)
+  | 'develop'
+  | 'note';
 
 export const EGG_TYPES: EggType[] = [
   'google', 'microsoft', 'confetti', 'fidget', 'bugs', 'deploy', 'coffee', 'motivate', 'hire',
   'pet', 'winver', 'bsod', 'clippy', 'dotnet', 'think', 'haiku',
+  'dino', 'recursion', 'lighthouse', 'doodle', 'kubectl',
+  'neofetch', 'swiftrun',
+  'reactions', 'reacttree', 'movefast',
+  'play', 'top10',
+  'day1', 'metrics',
+  'tokens', 'align',
+  'format', 'lint',
+  'develop', 'note',
 ];
 
 // Eggs that only exist in some themes. Anything not listed exists everywhere.
 const EGG_THEMES: Partial<Record<EggType, BrandId[]>> = {
   google: ['signal'],
   microsoft: ['signal', 'microsoft'],
-  pet: ['microsoft', 'anthropic'],
+  pet: ['microsoft', 'anthropic', 'google', 'apple', 'meta', 'netflix', 'amazon', 'openai', 'syntax', 'atelier'],
   winver: ['microsoft'],
   bsod: ['microsoft'],
   clippy: ['microsoft'],
   dotnet: ['microsoft'],
   think: ['anthropic'],
   haiku: ['anthropic'],
+  dino: ['google'],
+  recursion: ['google'],
+  lighthouse: ['google'],
+  doodle: ['google'],
+  kubectl: ['google'],
+  neofetch: ['apple'],
+  swiftrun: ['apple'],
+  reactions: ['meta'],
+  reacttree: ['meta'],
+  movefast: ['meta'],
+  play: ['netflix'],
+  top10: ['netflix'],
+  day1: ['amazon'],
+  metrics: ['amazon'],
+  tokens: ['openai'],
+  align: ['openai'],
+  format: ['syntax'],
+  lint: ['syntax'],
+  develop: ['atelier'],
+  note: ['atelier'],
 };
 
 export const eggsForBrand = (brand: BrandId): EggType[] => EGG_TYPES.filter(type => EGG_THEMES[type]?.includes(brand) ?? true);
 
 // What the logo and the footer button do in each theme
-export const LOGO_EGG: Record<BrandId, EggType> = { signal: 'google', microsoft: 'winver', anthropic: 'think' };
-export const FOOTER_EGG: Record<BrandId, EggType> = { signal: 'microsoft', microsoft: 'microsoft', anthropic: 'confetti' };
+export const LOGO_EGG: Record<BrandId, EggType> = {
+  signal: 'google', microsoft: 'winver', anthropic: 'think', google: 'doodle', apple: 'neofetch', meta: 'reactions',
+  netflix: 'play', amazon: 'day1', openai: 'tokens', syntax: 'format', atelier: 'note',
+};
+export const FOOTER_EGG: Record<BrandId, EggType> = {
+  signal: 'microsoft', microsoft: 'microsoft', anthropic: 'confetti', google: 'confetti', apple: 'confetti', meta: 'confetti',
+  netflix: 'confetti', amazon: 'confetti', openai: 'confetti', syntax: 'confetti', atelier: 'confetti',
+};
 
 export const EGG_EVENT = 'trigger-easter-egg';
 

@@ -35,16 +35,13 @@ const BrandSwitcher: React.FC = () => {
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={brand} onValueChange={value => isBrandId(value) && navigate(routeFor(value))}>
           {BRANDS.map(item => (
-            <DropdownMenuRadioItem key={item.id} value={item.id} className="items-start py-2">
-              <span className="flex flex-col">
-                <span className="flex items-center gap-2 font-medium">
-                  <span className="flex" aria-hidden="true">
-                    <span className="h-3 w-3 rounded-full" style={{ background: item.swatch[0] }} />
-                    <span className="-ml-1 h-3 w-3 rounded-full" style={{ background: item.swatch[1] }} />
-                  </span>
-                  {item.label}
+            <DropdownMenuRadioItem key={item.id} value={item.id} className="items-center py-2">
+              <span className="flex items-center gap-2 font-medium">
+                <span className="flex" aria-hidden="true">
+                  <span className="h-3 w-3 rounded-full" style={{ background: item.swatch[0] }} />
+                  <span className="-ml-1 h-3 w-3 rounded-full" style={{ background: item.swatch[1] }} />
                 </span>
-                <span className="text-xs text-muted-foreground">{item.description}</span>
+                {item.label}
               </span>
             </DropdownMenuRadioItem>
           ))}

@@ -41,18 +41,27 @@
         document.documentElement.classList.add('dark');
       }
       var companies = __COMPANY_BRANDS__;
+      var aliases = __ROUTE_ALIASES__;
       var toolsOn = '%VITE_THEME_SWITCHER%' === 'true' || localStorage.getItem('npro-unlock-themes') === 'true';
       var m = location.pathname.match(/^\/npro\/([^\/]+)/);
-      var brand = m && companies.indexOf(m[1]) > -1 ? m[1] : null;
+      var seg = m ? m[1].toLowerCase() : null;
+      // An alias route (e.g. /npro/gemini) paints as its target theme; SiteRoute redirects the URL after mount.
+      var brand = seg && companies.indexOf(seg) > -1 ? seg : seg && aliases[seg] ? aliases[seg] : null;
+      if (brand === 'signal') brand = null; // signal is the unmarked default, e.g. alias /npro/me
       var lock = sessionStorage.getItem('npro-company-lock');
       if (!toolsOn && lock && companies.indexOf(lock) > -1) brand = lock;
-      if (brand) document.documentElement.setAttribute('data-theme', brand);
+      if (brand) {
+        document.documentElement.setAttribute('data-theme', brand);
+        var favicon = document.getElementById('favicon-svg');
+        if (favicon) favicon.setAttribute('href', '%BASE_URL%/favicon-' + brand + '.svg');
+      }
     } catch (e) {}
   </script>
 
-  <!-- Icons: SVG for modern browsers, .ico for older ones and crawlers, PNG for iOS home screens -->
+  <!-- Icons: SVG for modern browsers, .ico for older ones and crawlers, PNG for iOS home screens.
+       The SVG one is swapped per company theme (pre-paint above, and at runtime in src/lib/brand.ts). -->
   <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" id="favicon-svg" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- Google Fonts -->
@@ -63,8 +72,6 @@
 
 <body>
   <div id="root"></div>
-  <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 

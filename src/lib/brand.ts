@@ -11,20 +11,31 @@ export { BASE_PATH, DEFAULT_BRAND, type BrandId };
 export interface BrandInfo {
   id: BrandId;
   label: string;
-  description: string;
   // Preview swatch only (shown in the switcher regardless of the active theme)
   swatch: [string, string];
 }
 
 export const BRANDS: BrandInfo[] = [
-  { id: 'signal', label: 'Signal', description: 'Default: teal and violet', swatch: ['#26C5B0', '#9D70EB'] },
-  { id: 'microsoft', label: 'Microsoft', description: 'Visual Studio purple, Fluent-inspired', swatch: ['#5C2D91', '#0078D4'] },
-  { id: 'anthropic', label: 'Anthropic', description: 'Warm cream and clay, editorial serif', swatch: ['#B4532F', '#3F6E99'] },
+  { id: 'signal', label: 'Signal', swatch: ['#26C5B0', '#9D70EB'] },
+  { id: 'microsoft', label: 'Microsoft', swatch: ['#5C2D91', '#0078D4'] },
+  { id: 'anthropic', label: 'Anthropic', swatch: ['#B4532F', '#3F6E99'] },
+  { id: 'google', label: 'Google', swatch: ['#1A73E8', '#188038'] },
+  { id: 'apple', label: 'Apple', swatch: ['#F5F5F7', '#0071E3'] },
+  { id: 'meta', label: 'Meta', swatch: ['#0064E0', '#7B2FF7'] },
+  { id: 'netflix', label: 'Netflix', swatch: ['#0A0A0A', '#E50914'] },
+  { id: 'amazon', label: 'Amazon', swatch: ['#173B54', '#FF9900'] },
+  { id: 'openai', label: 'OpenAI', swatch: ['#202123', '#10A37F'] },
+  { id: 'syntax', label: 'Syntax', swatch: ['#14151F', '#5B34D6'] },
+  { id: 'atelier', label: 'Atelier', swatch: ['#FBF8F2', '#3D6B4B'] },
 ];
 
 // Themes that need a web font the default theme doesn't load. Loaded once, when the theme is first applied.
+// Apple, Meta and Syntax use system/already-loaded fonts, so they need no entry here (Syntax's Segoe UI
+// Variable is a Microsoft-exclusive variable font with no public web-font distribution).
 const BRAND_FONT_URLS: Partial<Record<BrandId, string>> = {
   anthropic: 'https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap',
+  google: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap',
+  atelier: 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap',
 };
 
 const loadBrandFonts = (id: BrandId) => {
@@ -44,10 +55,16 @@ export const routeFor = (id: BrandId) => (id === DEFAULT_BRAND ? BASE_PATH : `${
 
 const THEME_EVENT = 'npro-brand-change';
 
+const updateFavicon = (id: BrandId) => {
+  const favicon = document.getElementById('favicon-svg');
+  if (favicon) favicon.setAttribute('href', id === DEFAULT_BRAND ? `${BASE_PATH}/favicon.svg` : `${BASE_PATH}/favicon-${id}.svg`);
+};
+
 export const applyBrand = (id: BrandId) => {
   if (id === DEFAULT_BRAND) delete document.documentElement.dataset.theme;
   else document.documentElement.dataset.theme = id;
   loadBrandFonts(id);
+  updateFavicon(id);
   window.dispatchEvent(new Event(THEME_EVENT));
 };
 
