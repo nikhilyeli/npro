@@ -40,33 +40,40 @@
       if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
       }
-      var companies = ["microsoft","anthropic"];
+      var companies = ["microsoft","anthropic","google","apple","meta","netflix","amazon","openai","syntax","atelier"];
+      var aliases = {"me":"signal","myself":"signal","personal":"signal","portfolio":"signal","resume":"signal","cv":"signal","msft":"microsoft","ms":"microsoft","windows":"microsoft","azure":"microsoft","dotnet":"microsoft","vscode":"microsoft","xbox":"microsoft","linkedin":"microsoft","claude":"anthropic","claudeai":"anthropic","chrome":"google","gemini":"google","android":"google","alphabet":"google","gcp":"google","deepmind":"google","youtube":"google","mac":"apple","macos":"apple","macbook":"apple","imac":"apple","iphone":"apple","ipad":"apple","ipod":"apple","ios":"apple","watchos":"apple","safari":"apple","icloud":"apple","facebook":"meta","fb":"meta","instagram":"meta","insta":"meta","whatsapp":"meta","threads":"meta","oculus":"meta","quest":"meta","nflx":"netflix","stream":"netflix","streaming":"netflix","aws":"amazon","prime":"amazon","chatgpt":"openai","gpt":"openai","gpt4":"openai","gpt5":"openai","sora":"openai","dev":"syntax","code":"syntax","ide":"syntax","terminal":"syntax","design":"atelier","studio":"atelier","photo":"atelier","photography":"atelier","gallery":"atelier"};
       var toolsOn = 'false' === 'true' || localStorage.getItem('npro-unlock-themes') === 'true';
       var m = location.pathname.match(/^\/npro\/([^\/]+)/);
-      var brand = m && companies.indexOf(m[1]) > -1 ? m[1] : null;
+      var seg = m ? m[1].toLowerCase() : null;
+      // An alias route (e.g. /npro/gemini) paints as its target theme; SiteRoute redirects the URL after mount.
+      var brand = seg && companies.indexOf(seg) > -1 ? seg : seg && aliases[seg] ? aliases[seg] : null;
+      if (brand === 'signal') brand = null; // signal is the unmarked default, e.g. alias /npro/me
       var lock = sessionStorage.getItem('npro-company-lock');
       if (!toolsOn && lock && companies.indexOf(lock) > -1) brand = lock;
-      if (brand) document.documentElement.setAttribute('data-theme', brand);
+      if (brand) {
+        document.documentElement.setAttribute('data-theme', brand);
+        var favicon = document.getElementById('favicon-svg');
+        if (favicon) favicon.setAttribute('href', '/npro/favicon-' + brand + '.svg');
+      }
     } catch (e) {}
   </script>
 
-  <!-- Icons: SVG for modern browsers, .ico for older ones and crawlers, PNG for iOS home screens -->
+  <!-- Icons: SVG for modern browsers, .ico for older ones and crawlers, PNG for iOS home screens.
+       The SVG one is swapped per company theme (pre-paint above, and at runtime in src/lib/brand.ts). -->
   <link rel="icon" href="/npro/favicon.ico" sizes="16x16 32x32 48x48" />
-  <link rel="icon" type="image/svg+xml" href="/npro/favicon.svg" />
+  <link rel="icon" id="favicon-svg" type="image/svg+xml" href="/npro/favicon.svg" />
   <link rel="apple-touch-icon" href="/npro/apple-touch-icon.png" />
 
   <!-- Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" />
-  <script type="module" crossorigin src="/npro/assets/index-C8AVyTTw.js"></script>
-  <link rel="stylesheet" crossorigin href="/npro/assets/index-58flx29_.css">
+  <script type="module" crossorigin src="/npro/assets/index-CqqfiIhN.js"></script>
+  <link rel="stylesheet" crossorigin href="/npro/assets/index-c4LiQtXp.css">
 </head>
 
 <body>
   <div id="root"></div>
-  <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
 </body>
 
 </html>
