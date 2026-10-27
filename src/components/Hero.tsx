@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from './Logo';
 import portfolioData from '@/data/portfolio.json';
+import { BRANDS, DEFAULT_BRAND, useBrand } from '@/lib/brand';
+import { getVariant } from '@/lib/variants';
 
 const Hero: React.FC = () => {
   const [currentTitle, setCurrentTitle] = useState(0);
   const titles = portfolioData.hero.titles;
+  const brand = useBrand();
+  const variant = brand === DEFAULT_BRAND ? null : getVariant(brand);
+  const companyLabel = BRANDS.find(b => b.id === brand)?.label;
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTitle(prev => (prev + 1) % titles.length);
@@ -43,8 +48,22 @@ const Hero: React.FC = () => {
         </h1>
         
         <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-xl">
-          {portfolioData.hero.description}
+          {variant?.heroDescription ?? portfolioData.hero.description}
         </p>
+
+        {variant && (
+          <div className="mt-8 max-w-xl rounded-2xl border border-border bg-card/60 p-5 text-left backdrop-blur-sm">
+            <p className="text-sm font-semibold text-primary">Why {companyLabel}</p>
+            <ul className="mt-2 space-y-1.5 text-sm text-muted-foreground">
+              {variant.whyFit.map(reason => (
+                <li key={reason} className="flex gap-2">
+                  <span aria-hidden="true" className="text-primary">•</span>
+                  <span>{reason}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <div className="flex flex-col sm:flex-row gap-4 mt-10">
           <Button size="lg" onClick={() => document.querySelector('#projects')?.scrollIntoView({

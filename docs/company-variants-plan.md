@@ -1,16 +1,33 @@
 # nPro: Theme Modes and Company Variants — Plan
 
-Status (2026-09-20):
-- **Phase 0 (tokens) DONE**: `--success`, `--progress*`, `--confetti-*`, `--font-sans/mono`; dead `App.css` removed.
-- **Phase 1 (theme system) DONE and now route-based**: `data-theme` axis, `src/lib/brand.ts`, route `/npro/:company?` (`src/pages/SiteRoute.tsx`), pre-paint script. The theme comes from the **route**; there is no saved brand preference any more.
-- **Phase 2 (Microsoft theme, "Visual Purple") DONE**: see the guide. Signal stays the default.
-- **Phase 4, partly DONE**: static `/npro/<company>/index.html` + `404.html` are generated at build; session **company lock** is on; **theme tools flag** (`VITE_THEME_SWITCHER`) is off in production. Still to do: per-company OG image/meta and favicon per page.
-- **Phase 5 started: Anthropic** (`/npro/anthropic`): theme tokens, serif headings, Claude-style terminal, pet, `think`/`haiku` eggs. See [anthropic-theme-guide.md](./anthropic-theme-guide.md). Next in order: Google, Apple, Meta, Netflix, Amazon.
-- **Per-theme easter eggs and terminal pets (2026-09-20):** each theme has its own egg set (`eggsForBrand` in `src/lib/easterEggs.ts`), so "found N of M" counts only that theme's eggs. Microsoft: `winver`, `bsod`, `clippy`, `dotnet run`, Azure `deploy`, `runas` + a duck pet. Anthropic: `think`, `haiku` + a critter pet. The logo and footer buttons trigger a theme-specific egg.
+Status (2026-09-23, revised twice same day — bug-fix/expansion pass, then two non-company design-language themes):
+- **Non-company themes added: Syntax and Atelier.** `/npro/syntax` and `/npro/atelier` (aliases: `dev`/`code`/`ide`/`terminal` and `design`/`studio`/`photo`/`photography`/`gallery`) are **not companies** — they're a developer design language and a studio/photography design language, ported from the user's own "Syntax & Atelier" Design System artifact, tokens converted to HSL and independently re-verified for WCAG AA rather than trusted as-is. Each got the same treatment as a company theme (tokens, terminal, an original pet — "Cursor" for Syntax, "Sprout" for Atelier — and 2 easter eggs) **except** the "Why {Company}" content-variant panel, which only makes sense for an actual employer page. Full details: [syntax-theme-guide.md](./syntax-theme-guide.md), [atelier-theme-guide.md](./atelier-theme-guide.md). `COMPANY_BRAND_IDS` in `src/lib/brandIds.ts` now holds 10 entries; its own comment flags that the name is a slight misnomer for these two.
+- **Phase 0 (tokens) DONE**: `--success`, `--progress*`, `--confetti-*`, `--font-sans/mono/display`; dead `App.css` removed. All traces of the Lovable scaffold (the `gpteng.co` editor script, `lovable-tagger`) have also been removed — see [remove-lovable-traces-guide.md](./remove-lovable-traces-guide.md).
+- **Phase 1 (theme system) DONE and route-based**: `data-theme` axis, `src/lib/brand.ts` + `src/lib/brandIds.ts`, route `/npro/:company?` (`src/pages/SiteRoute.tsx`), pre-paint script. The theme comes from the **route**; there is no saved brand preference.
+- **Phase 2 DONE for all eight companies: Microsoft ("Visual Purple"), Anthropic (cream/clay, serif), Google (Material tonal blue), Apple (spacious, one blue accent), Meta (friendly blue/grey), Netflix (near-black + red), Amazon (navy + amber), OpenAI (near-monochrome + teal).** Signal stays the default. Every guide is now marked IMPLEMENTED, including a new [openai-theme-guide.md](./openai-theme-guide.md) written and built in this pass (no prior plan existed for it).
+  - Netflix and Amazon shipped as **palette + terminal + pet + eggs** (the lighter option in each guide's open question) — no horizontal "rows" layout, no Leadership-Principle bullet tags. Revisit either later if wanted.
+- **Route aliases (new):** natural-language routes now resolve to the right theme via `ROUTE_ALIASES` in `src/lib/brandIds.ts` and redirect to the canonical route, e.g. `/npro/me` → Signal, `/npro/claude` → Anthropic, `/npro/gemini`/`chrome`/`android` → Google, `/npro/mac`/`iphone`/`ipad`/`ios` → Apple, `/npro/fb`/`instagram`/`whatsapp` → Meta, `/npro/aws`/`prime` → Amazon, `/npro/chatgpt`/`gpt` → OpenAI. The alias list is edited in one place; add more there.
+- **Phase 3 (content variants): now built, generic across every theme.** `src/lib/variants.ts` holds a small `CompanyVariant` per company (a tailored one-line hero description, 2-3 truthful "Why {Company}" bullets sourced only from facts already in `portfolio.json`, a project display order, and a skill-category display order). Wired into `Hero.tsx` (new "Why {Company}" card, hidden on Signal), `Projects.tsx` and `Skills.tsx` (reordering only, no new claims). Nothing is invented; every bullet traces to an existing highlight, metric, or project.
+- **Phase 4, mostly DONE**: static `/npro/<company>/index.html` + `404.html` generated at build for all eight companies; session **company lock** is on; **theme tools flag** (`VITE_THEME_SWITCHER`) is off in production; the favicon (`.ico`/apple-touch/SVG) now **updates per theme** too — `favicon-<id>.svg` per company, swapped at runtime (`applyBrand` in `brand.ts`) and pre-painted (`index.html`) and baked into each company's static entry (`vite.config.ts`). Still to do: per-company OG image/meta (every company page still shares the one default OG image).
+- **Bug fixes in this pass:**
+  - The About-section boot "typewriter" (`Console.tsx`) had two effects racing — a new line could start typing before the last one finished, leaving several lines frozen mid-word (looked like a dumped wall of text, not a clean type-out). Replaced with one sequential typer.
+  - The Dino Runner's jump could arc higher than the canvas's headroom, so the sprite visually vanished off the top at the peak of a jump ("hit the ceiling") right before a mistimed landing. Retuned gravity/jump velocity for a snappier arc and added a hard clamp so it can never exceed the canvas, whatever the input.
+  - The Dino pixel sprite (`TerminalPet.tsx`) was redrawn with a clearer head/mouth-notch/tail silhouette — the old grid read as a grey blob more than a dinosaur.
+  - The theme switcher's per-theme description line was removed from the dropdown (swatch + name only now).
+- **New pets:** Apple's pet is now **Orb**, a Siri-inspired soft gradient "AI orb" with a small animated waveform (awake) or a resting line (asleep) — no pixel cat anymore. Meta's pet is now **Aria**, the same orb shape in Meta's blue/purple/pink. Netflix has **Reel** (a round film-reel character with three holes). Amazon has **Box** (a cardboard shipping box with a tape cross). OpenAI has **Ada** (a small blocky assistant bot with a lit visor). All are original pixel/vector art built from code, never a real product mark.
+- **Per-theme easter eggs and terminal pets, now covering all eight built themes:**
+  - Microsoft: `winver`, `bsod`, `clippy`, `dotnet run`, Azure `deploy`/`azd up`, `runas` + **Debug Duck** (duck pet).
+  - Anthropic: `think`, `haiku` + **Sparky** (critter pet).
+  - Google: `dino` (opens the **Dino Runner** game — jump/duck endless runner, win at 300, reduced-motion "stroll" mode, high score saved), `recursion`, `lighthouse`, `doodle` (wiggles the logo), `kubectl`, `lucky` (random pick, google-only) + **Dino** (T-rex pet; double-click or Space/↑ also opens the runner).
+  - Apple: `neofetch`, `swift run` (`swiftrun`) + **Orb** (Siri-inspired AI-orb pet).
+  - Meta: `reactions`/`like` (an emoji "reaction rain" using the confetti canvas's emoji-particle mode), `reacttree`, `move-fast` + **Aria** (Meta-colored AI-orb pet).
+  - Netflix: `play`/`resume` ("Continue watching…"), `top10` (a real top-10 skills list) + **Reel** (film-reel pet).
+  - Amazon: `day1`, `metrics` (an illustrative, clearly-labeled fake dashboard) + **Box** (cardboard-box pet).
+  - OpenAI: `tokens`, `align` + **Ada** (assistant-bot pet).
+  - The logo and footer buttons fire a theme-specific egg everywhere (`LOGO_EGG`/`FOOTER_EGG` in `src/lib/easterEggs.ts`); "found N of M" always counts only the current theme's eggs.
 - **404 page redesigned:** theme-aware, "home" respects the company lock, never links to another company, and no longer points at `/` (the wrong root on GitHub Pages).
-- **Plans written, not implemented (2026-09-20):** guides for [Google](./google-theme-guide.md), [Apple](./apple-theme-guide.md) and [Meta](./meta-theme-guide.md) (palettes contrast-checked), and [private-variants-and-route-lock-plan.md](./private-variants-and-route-lock-plan.md) for hiding company details from page source/bundles/repo plus route blocking and auto-switch. **That plan supersedes the production side of "Routes, company lock and theme tools" below.**
-- **Favicon set fixed:** `favicon.ico` (16/32/48), `apple-touch-icon.png` and the SVG are all linked in `index.html`.
-- **Phase 3 (content variants): not started.**
+- **Plan written, not implemented:** [private-variants-and-route-lock-plan.md](./private-variants-and-route-lock-plan.md) for hiding company details from page source/bundles/repo plus per-entry bundle splitting and (optionally) a private repo. **Deliberately not built in this pass** — its own "Decisions for you" section has five open questions (remove the prod DevTools unlock, private repo + CI secret, opaque URLs, encrypted payloads, git-history cleanup) that materially change the design, and Phase B of that plan (multi-entry Vite build) is a real architectural change with regression risk across every theme. Today all eight company themes still ship in one bundle and are visible in the default page's JS/CSS — same limits as before. Answer that doc's "Decisions for you" before starting it.
+- **Verified 2026-09-23:** contrast-checked (WCAG AA) in light and dark for all eight themes (Netflix/Amazon per their guides' existing tables; OpenAI newly checked, one primary value darkened from 32% to 27% lightness to clear 4.5:1 for button text); a production build generates all eight static company pages plus per-company favicons; typecheck clean; spot-checked in the browser desktop (1440px) then mobile (375px) for the new themes, the fixed typewriter sequencing, the retuned Dino Runner (jump stays on-canvas; verified via the physics math and a mid-jump screenshot), and the new orb/reel/box/bot pets.
 
 ## Decisions (2026-09-20)
 
@@ -18,7 +35,7 @@ Status (2026-09-20):
 - **Microsoft = "Visual Purple":** Visual Studio purple is the primary, Fluent blue is the second accent and the roadmap "in progress" color.
 - **No "Tailored for <Company>" line** on variant pages. Variants stay silent.
 - **Everything is route-based** (`/npro` = Signal, `/npro/microsoft` = Microsoft). The switcher button and the terminal `theme` command are **dev tools**: they exist only when the theme-tools flag is on (see below), and they just navigate between routes.
-- **Company order after Microsoft:** Anthropic → Google → Apple → Meta → Netflix → Amazon.
+- **Company order after Microsoft:** Anthropic → Google → Apple → Meta → Netflix → Amazon → OpenAI. All built as of 2026-09-23.
 
 ## Routes, company lock and theme tools (implemented 2026-09-20)
 
@@ -146,9 +163,10 @@ To do: give each of those pages its own `<title>`, description, `og:url` and `og
 
 Order of work per phase: **plan → tokens → verify in browser (desktop first, then mobile) → screenshots → commit.**
 
-## Company pack ideas (build order: Microsoft ✔ → Anthropic → Google → Apple → Meta → Netflix → Amazon; starting directions, verify against each brand's current public guidelines)
+## Company pack ideas (build order: Microsoft ✔ → Anthropic ✔ → Google ✔ → Apple ✔ → Meta ✔ → Netflix → Amazon; starting directions, verify against each brand's current public guidelines)
 
-Meta (added 2026-09-20) has no notes in the table yet: research at pack time. Starting hints: blue `#0866FF`-family, clean sans, "move fast", impact and scale, open source (React is from Meta: a truthful, relevant angle for a React developer).
+Meta: blue `#0866FF`-family (darkened for AA in light mode), clean sans (Inter, no new font), "move fast", impact and scale, open source (React is from Meta: a truthful, relevant angle for a React developer). Built 2026-09-23: see [meta-theme-guide.md](./meta-theme-guide.md).
+Netflix and Amazon (added 2026-09-23) now have full plan-only guides: [netflix-theme-guide.md](./netflix-theme-guide.md), [amazon-theme-guide.md](./amazon-theme-guide.md) — palettes contrast-checked, pets and eggs proposed, nothing built.
 
 | Company | Vibe | Palette direction | Type direction | Content angle |
 |---|---|---|---|---|

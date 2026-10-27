@@ -11,6 +11,9 @@ node_modules
 dist
 dist-ssr
 *.local
+.playwright-mcp/*.log
+.playwright-mcp/*.yml
+.playwright-mcp/*.png
 
 # Editor directories and files
 .vscode/*

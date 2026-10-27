@@ -1,7 +1,10 @@
 # Google Theme Guide (Material 3 inspired), PLAN ONLY
 
-Status: **PLAN. Not implemented.** (2026-09-20) Build order: 3rd, after Anthropic. Part of [company-variants-plan.md](./company-variants-plan.md).
+Status: **IMPLEMENTED 2026-09-23.** Route: `/npro/google`. Build order: 3rd, after Anthropic. Part of [company-variants-plan.md](./company-variants-plan.md).
 Inspired by, not affiliated with, Google: no logos or wordmarks. **Decision (2026-09-20): the pet and the game egg are a homage to the Chrome offline dinosaur**, drawn as our own pixel art (not Google's assets or code). Other Google mascots (Android bot, Gopher) stay out. It is a playful nod on a personal portfolio, not an endorsement; if that ever feels risky, swap the sprite for a generic dinosaur with no other change.
+
+**Built:** tokens (light/dark, contrast-checked), Roboto/Roboto Mono (lazy-loaded), "Cloud Shell" terminal, the Dino pet (double-click or Space/↑ opens the game), the full Dino Runner (canvas endless runner: jump/duck, ramping speed, AABB collision, 5-digit score, win banner at 300, game-over/replay, saved high score, reduced-motion "stroll" mode, mute + Close), `doodle` (logo wiggle via a CSS keyframe), `recursion`, `lighthouse`, `kubectl`, and the google-only `lucky` command (random pick).
+**Simplified from the original proposal:** the terminal keeps the shared mac-style dot chrome rather than a custom tab strip; `kubectl`/`lighthouse`/`neofetch`-style outputs are console text, not full visual panels. **Not built:** content variant, per-page OG/favicon (tracked in the private-variants plan).
 
 ## Direction
 

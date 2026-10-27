@@ -5,6 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import SectionHeading from '@/components/SectionHeading';
 import { cn } from '@/lib/utils';
 import portfolioData from '@/data/portfolio.json';
+import { useBrand } from '@/lib/brand';
+import { getVariant, orderByCategory } from '@/lib/variants';
 
 interface Skill {
   name: string;
@@ -14,8 +16,9 @@ interface Skill {
 
 const Skills: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('all');
-  
-  const skills: Skill[] = portfolioData.skills as Skill[];
+  const brand = useBrand();
+
+  const skills: Skill[] = orderByCategory(portfolioData.skills as Skill[], getVariant(brand)?.skillOrder);
 
   const filteredSkills = activeTab === 'all' 
     ? skills 
