@@ -1,7 +1,10 @@
 # Meta Theme Guide (friendly, social, React-forward), PLAN ONLY
 
-Status: **PLAN. Not implemented.** (2026-09-20) Build order: 5th (Anthropic, Google, Apple, then Meta). Part of [company-variants-plan.md](./company-variants-plan.md).
+Status: **IMPLEMENTED 2026-09-23.** Route: `/npro/meta`. Build order: 5th (Anthropic, Google, Apple, then Meta). Part of [company-variants-plan.md](./company-variants-plan.md).
 Inspired by, not affiliated with, Meta: no infinity logo, no Facebook/Instagram/WhatsApp marks.
+
+**Built:** tokens (light/dark, contrast-checked; primary darkened from the bright brand blue to pass AA), Inter (no new font), the terminal (`nikhil@dev ~ $`), the Loma llama pet, `reactions`/`like` (a new emoji-particle "reaction rain" mode added to the shared confetti canvas, logo click), `reacttree` (fake component-tree output), `move-fast`, and `deploy --canary`.
+**Simplified from the original proposal:** the "hackathon" 24-hour commit timelapse idea was dropped as over-scoped for an egg (a quick text sequence exists via `movefast` instead). **Not built:** content variant, per-page OG/favicon.
 
 ## Direction
 

@@ -1,7 +1,10 @@
 # Apple Theme Guide (spacious, product-page storytelling), PLAN ONLY
 
-Status: **PLAN. Not implemented.** (2026-09-20) Build order: 4th (after Anthropic, Google). Part of [company-variants-plan.md](./company-variants-plan.md).
+Status: **IMPLEMENTED 2026-09-23.** Route: `/npro/apple`. Build order: 4th (after Anthropic, Google). Part of [company-variants-plan.md](./company-variants-plan.md).
 Inspired by, not affiliated with, Apple: no Apple logo, no slogans, no product imagery.
+
+**Built:** tokens (light/dark, contrast-checked), the system font stack (no new download), the macOS-style terminal titled `nikhil — zsh — 80×24`, the Pixel cat pet, `neofetch` (system-info block, logo click), `swift run`, and `deploy` as an Xcode-style archive/upload pipeline.
+**Deliberately not built** (flagged as out of scope for an "egg" when this was planned, and still true): the `spotlight` command palette (a real UX feature, not a small easter egg) and the `say hello` speech-synthesis egg (cross-browser speech API risk for low payoff). **Not built:** content variant, per-page OG/favicon.
 
 ## Direction
 
